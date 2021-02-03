@@ -1,11 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+/* Importing Bootstrap SCSS file. */
 
-
-.fas, .far {
-    color: white;
+@import '~bootstrap/scss/bootstrap';
+body {
+    font-family: "Proxima Nova", -apple-system, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif, sans-serif;
 }
 
-.icon{
+.icon {
     /* width: 45px; */
     height: 45px;
     display: flex;
@@ -14,8 +14,36 @@
     /* font-size: 20px; */
 }
 
-@media (min-width: 1400px){
-    .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+.modal-header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0;
+    border: 0;
+}
+
+.model-close {
+    padding: 5px 10px;
+    color: black;
+}
+
+.model-title {
+    font-size: 20px;
+    font-weight: 600;
+    padding-bottom: 8px;
+    line-height: 1.18;
+}
+
+label {
+    margin: 0;
+}
+
+@media (min-width: 1400px) {
+    .container,
+    .container-lg,
+    .container-md,
+    .container-sm,
+    .container-xl,
+    .container-xxl {
         max-width: 1320px;
     }
 }
