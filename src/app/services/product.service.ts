@@ -13,4 +13,8 @@ export class ProductService {
     let params = '';
     return this.http.get(`${environment.apiURL}/product/page/filter${params}`);
   }
+
+  getById(id: number) {
+    return this.http.get(environment.apiURL + '/product/' + id);
+  }
 }

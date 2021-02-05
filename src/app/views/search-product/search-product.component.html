@@ -1,5 +1,5 @@
 <app-navbar>
-    <div ctop class="navbar-nav">
+    <ul ctop class="navbar-nav">
         <li class="nav-item me-auto ml-lg-2 mr-lg-2 mb-2 mb-lg-0 mt-lg-1 mt-3">
             <a type="button" class="btn btn-outline-light">Cor <i style="margin-left: 20px;"
                     class="fas fa-angle-down "></i></a>
@@ -12,27 +12,27 @@
             <a type="button" class="btn btn-outline-light">Modelo <i style="margin-left: 20px;"
                     class="fas fa-angle-down "></i></a>
         </li>
-    </div>
+    </ul>
 </app-navbar>
 
 <ng-template #content let-modal>
-    <div class="modal-header">
+    <div class="modal-header d-flex justify-content-start justify-content-md-end pl-2 pl-md-0 pt-2 pb-2 pt-md-0 pb-md-0">
         <a class="model-close" type="button" (click)="modal.dismiss('Cross click')">
-            <i class="fas fa-close"></i>
+            <i class="fas fa-close d-none d-lg-block"></i>
+            <i class="fas fa-arrow-left text-orange d-block d-lg-none" style="font-size: 22px;"></i>
         </a>
     </div>
     <div class="modal-body">
-        <app-product [product]=product></app-product>
+        <app-product [id]=product.id></app-product>
     </div>
 </ng-template>
 
 
 <div class="container-fluid container-main">
-
     <div class="row row-cols-1 row-cols-md-4 row-cols-xl-6 g-4">
         <div *ngFor="let product of products" class="col mt-3">
             <div class="card h-100">
-                <img [src]="product.photo" class="card-img-top" [alt]="product.name">
+                <img [src]="product.photo" class="card-img-top" [alt]="product.name" onerror="this.src = './assets/images/product-default.jpg'">
                 <div class="card-body">
                     <h5 class="card-title d-flex justify-content-between">
                         <p>{{product.price | currency:'BRL'}}</p>

@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HashLocationStrategy, LocationStrategy, registerLocaleData } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductComponent } from './views/product/product.component';
+import { SpinnerComponent } from './components/layout/spinner/spinner.component';
 
 
 registerLocaleData(localePt, 'pt');
@@ -19,7 +20,8 @@ registerLocaleData(localePt, 'pt');
     AppComponent,
     NavbarComponent,
     SearchProductComponent,
-    ProductComponent
+    ProductComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

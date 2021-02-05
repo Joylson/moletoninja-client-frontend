@@ -1,15 +1,53 @@
-<div class="row">
-    <div class="col-md-7 p-4">
-        <img [src]="product.photo" class="card-img" alt="" srcset="">
-    </div>
-    <div class="col-md-5">
-        <div class="card-title model-title">
+<div *ngIf="!product" style="height: 600px;" class="d-flex align-items-center justify-content-center">
+    <app-spinner></app-spinner>
+</div>
+<div *ngIf="product" class="row">
+    <div class="col-sm-12">
+        <div class="card-title model-title d-block d-lg-none">
             {{product.name}}
         </div>
-        <div>{{product.price | currency :'BRL'}}</div>
+    </div>
+    <div class="col-md-6 p-4 ml-4 d-flex align-items-center">
+        <img [src]="product.photo" class="card-img" alt="" srcset="">
+    </div>
+    <div class="col-md-5 pr-md-0 ml-md-2 p-3 p-md-2">
+        <div class="card-title model-title d-none d-lg-block">
+            {{product.name}}
+        </div>
+        <div class="card-price">{{product.price | currency :'BRL'}}</div>
+        <div class="mt-3">
+            <label class="text-muted pr-2">Tamanho:</label>
+            <label>{{selSize ? selSize.name : ''}}</label>
+            <ul class="navbar-nav d-flex flex-row flex-wrap">
+                <li *ngFor="let size of sizes" class="nav-item me-auto mr-3 mb-2 mb-0 mt-1 mt-2">
+                    <a type="button" [style]="{'background-color': selSize  && size.id === selSize.id ? '#6c757d' : '', 'color': selSize  && size.id === selSize.id ? 'white' : ''}" (click)="selectSize(size)" class="btn btn-outline-secondary">{{size.name}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="mt-3">
+            <label class="text-muted pr-2">Cor:</label>
+            <label>{{selColor ? selColor.name : ''}}</label>
+            <ul class="navbar-nav d-flex flex-row flex-wrap">
+                <li *ngFor="let color of colors" class="nav-item me-auto mr-3 mb-2 mb-0 mt-1 mt-2">
+                    <a type="button" (click)="selectColor(color)">
+                        <div class="circle" [style]="{'background-color': '#' + color.hexadecimal, 'border-color' : selColor  && color.id === selColor.id ?  '#ff9d35' : '#203A43'}"></div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="card mt-3">
+            <img src="./assets/images/print-product.png">
+        </div>
+        <div class="card mt-3">
+            <div class="d-flex">
+                <button type="button" class="btn btn-orange flex-fill">
+                    <i class="fas fa-shopping-cart"></i> Adicionar Carrinho
+                </button>
+            </div>
+        </div>
     </div>
 </div>
-<div class="row">
+<div *ngIf="product" class="row">
     <div class="col-sm-12">
         <label for="description">Descricação:</label>
         <p id="description" class="text-muted">{{product.description}}</p>

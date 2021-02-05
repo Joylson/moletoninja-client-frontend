@@ -15,8 +15,6 @@ body {
 }
 
 .modal-header {
-    display: flex;
-    justify-content: flex-end;
     padding: 0;
     border: 0;
 }
@@ -35,6 +33,35 @@ body {
 
 label {
     margin: 0;
+}
+
+.circle {
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    border: 2px solid #6c757d;
+}
+
+.modal-body {
+    padding: 0 1rem;
+}
+
+.btn-orange {
+    background-color: #ff9d35;
+}
+
+.text-orange {
+    color: #ff9d35;
+}
+
+@media (max-width: 768px) {
+    .modal-dialog-centered {
+        margin: 0;
+    }
+    .modal-dialog-centered .modal-content {
+        width: 100vw;
+        height: 100%;
+    }
 }
 
 @media (min-width: 1400px) {
