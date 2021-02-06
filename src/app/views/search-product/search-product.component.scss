@@ -15,6 +15,17 @@
     margin-bottom: 0;
 }
 
+.container-card-img-top {
+    height: 281px;
+}
+
+.card-img-top {
+    align-self: center;
+    max-height: 281px;
+    width: auto !important;
+    max-width: 100%;
+}
+
 .card-text {
     font-size: 0.9rem;
     color: #535557!important;

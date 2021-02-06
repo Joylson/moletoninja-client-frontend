@@ -29,10 +29,12 @@
 
 
 <div class="container-fluid container-main">
-    <div class="row row-cols-1 row-cols-md-4 row-cols-xl-6 g-4">
+    <div class="row row-cols-1 row-cols-md-3 row-cols-xl-5 g-4">
         <div *ngFor="let product of products" class="col mt-3">
-            <div class="card h-100">
-                <img [src]="product.photo" class="card-img-top" [alt]="product.name" onerror="this.src = './assets/images/product-default.jpg'">
+            <div class="card h-100 pt-2">
+                <div class="d-flex justify-content-center container-card-img-top">
+                    <img [src]="product.photo" class="card-img-top" [alt]="product.name" onerror="this.src = './assets/images/product-default.jpg'">
+                </div>
                 <div class="card-body">
                     <h5 class="card-title d-flex justify-content-between">
                         <p>{{product.price | currency:'BRL'}}</p>

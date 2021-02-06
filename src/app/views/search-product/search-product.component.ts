@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-search-product',
@@ -11,12 +12,18 @@ export class SearchProductComponent implements OnInit {
   public products: any;
   public product: any;
 
-  constructor(private productService: ProductService, private modalService: NgbModal) { }
+  constructor(private productService: ProductService,
+    private modalService: NgbModal,
+    private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.productService.filter().subscribe((data) => {
-      this.products = data['docs'];
-    })
+    this.activeRoute.queryParams.subscribe(params => {
+      let search = params['search'];
+      console.log(search)
+      this.productService.filter('id', 'ASC', null, 1, 30, search).subscribe((data) => {
+        this.products = data['docs'];
+      })
+    });
   }
 
 

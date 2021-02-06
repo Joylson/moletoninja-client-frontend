@@ -11,6 +11,7 @@ import { HashLocationStrategy, LocationStrategy, registerLocaleData } from '@ang
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductComponent } from './views/product/product.component';
 import { SpinnerComponent } from './components/layout/spinner/spinner.component';
+import { FormsModule } from '@angular/forms';
 
 
 registerLocaleData(localePt, 'pt');
@@ -27,7 +28,8 @@ registerLocaleData(localePt, 'pt');
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    FormsModule
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
