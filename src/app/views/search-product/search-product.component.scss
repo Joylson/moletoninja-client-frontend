@@ -31,6 +31,30 @@
     color: #535557!important;
 }
 
+.back-container-filter {
+    position: fixed;
+    top: 120px;
+    height: calc(100vh - 120px);
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1032;
+}
+
+.container-filter {
+    height: 0;
+    width: 100%;
+    top: 120px;
+    position: fixed;
+    z-index: 1033;
+    background-color: #203A43;
+    box-shadow: 0 1px 5px rgb(0 0 0 / 15%);
+    transition: height 1s;
+}
+
+.filter-visibled {
+    height: auto;
+}
+
 @media (max-width: 992px) {
     .container-main {
         margin-top: 240px;
