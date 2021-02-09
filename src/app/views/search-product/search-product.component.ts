@@ -120,7 +120,7 @@ export class SearchProductComponent implements OnInit {
 
   modelsReload = () => [
     { name: 'Masculino', type: 'M' },
-    { name: 'Femenino', type: 'F' }
+    { name: 'Feminino', type: 'F' }
   ];
 
   filterNone() {
