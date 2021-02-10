@@ -57,6 +57,11 @@
 
 @media (max-width: 992px) {
     .container-main {
-        margin-top: 240px;
+        margin-top: 310px;
+    }
+    .container-filter {
+        top: 320px;
+        background-color: #fc6616;
+        position: absolute;
     }
 }

@@ -13,6 +13,20 @@
                     class="fas fa-angle-down "></i></a>
         </li>
     </ul>
+    <ul mobilectop class="navbar-nav">
+        <li class="nav-item me-auto ml-lg-2 mr-lg-2 mb-2 mb-lg-0 mt-lg-1 mt-3 d-flex">
+            <a type="button" class="btn btn-outline-light flex-fill" (click)="filterColor()">{{color ? color.name : 'Cor'}} <i
+                    style="margin-left: 20px;" class="fas fa-angle-down "></i></a>
+        </li>
+        <li class="nav-item me-auto ml-lg-2 mr-lg-2 mb-2 mb-lg-0 mt-lg-1 mt-3 d-flex">
+            <a type="button" class="btn btn-outline-light flex-fill" (click)="filterSize()">{{size ? size.name : 'Tamanho'}} <i style="margin-left: 20px;"
+                    class="fas fa-angle-down"></i></a>
+        </li>
+        <li class="nav-item me-auto ml-lg-2 mr-lg-2 mb-2 mb-lg-0 mt-lg-1 mt-3 d-flex">
+            <a type="button" class="btn btn-outline-light flex-fill" (click)="filterModel()">{{model ? model.name : 'Modelo'}} <i style="margin-left: 20px;"
+                    class="fas fa-angle-down "></i></a>
+        </li>
+    </ul>
 </app-navbar>
 
 <div class="container-filter" [ngClass]="diplayFilter()">
