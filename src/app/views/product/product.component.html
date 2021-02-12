@@ -35,12 +35,12 @@
                 </li>
             </ul>
         </div>
-        <div class="card mt-3">
-            <img src="./assets/images/print-product.png">
+        <div class="card mt-3 align-items-center justify-content-center" style="cursor: pointer;" (click)="open(content)">
+            <img class="card-img-print" [src]="print ? print.imageFile : './assets/images/print-product.png'">
         </div>
         <div class="card mt-3">
             <div class="d-flex">
-                <button type="button" class="btn btn-orange flex-fill">
+                <button type="button" class="btn btn-orange flex-fill" (click)="addStockProduct()">
                     <i class="fas fa-shopping-cart"></i> Adicionar Carrinho
                 </button>
             </div>
@@ -53,3 +53,16 @@
         <p id="description" class="text-muted">{{product.description}}</p>
     </div>
 </div>
+
+
+<ng-template #content let-modal>
+    <div class="modal-header d-flex justify-content-start justify-content-md-end pl-2 pl-md-0 pt-2 pb-2 pt-md-0 pb-md-0">
+        <a class="model-close" type="button" (click)="modal.dismiss('Cross click')">
+            <i class="fas fa-close d-none d-lg-block"></i>
+            <i class="fas fa-arrow-left text-orange d-block d-lg-none" style="font-size: 22px;"></i>
+        </a>
+    </div>
+    <div class="modal-body">
+        <app-prints (print)="printSelect($event, modal)"></app-prints>
+    </div>
+</ng-template>

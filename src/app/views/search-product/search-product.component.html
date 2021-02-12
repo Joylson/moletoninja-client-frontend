@@ -53,7 +53,7 @@
         </a>
     </div>
     <div class="modal-body">
-        <app-product [id]=product.id></app-product>
+        <app-product [id]="product.id" (add)="modal.dismiss('Cross click')"></app-product>
     </div>
 </ng-template>
 
@@ -61,7 +61,7 @@
 <div class="container-fluid container-main">
     <div class="row row-cols-1 row-cols-md-3 row-cols-xl-5 g-4">
         <div *ngFor="let product of products" class="col mt-3">
-            <div class="card h-100 pt-2">
+            <div class="card card-default h-100 pt-2">
                 <div class="d-flex justify-content-center container-card-img-top">
                     <img [src]="product.photo" class="card-img-top" [alt]="product.name" onerror="this.src = './assets/images/product-default.jpg'">
                 </div>

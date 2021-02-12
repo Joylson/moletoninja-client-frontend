@@ -12,6 +12,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductComponent } from './views/product/product.component';
 import { SpinnerComponent } from './components/layout/spinner/spinner.component';
 import { FormsModule } from '@angular/forms';
+import { PrintsComponent } from './views/prints/prints.component';
+import { OrderCardComponent } from './components/layout/order-card/order-card.component';
 
 
 registerLocaleData(localePt, 'pt');
@@ -22,7 +24,9 @@ registerLocaleData(localePt, 'pt');
     NavbarComponent,
     SearchProductComponent,
     ProductComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    PrintsComponent,
+    OrderCardComponent
   ],
   imports: [
     BrowserModule,

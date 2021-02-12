@@ -1,0 +1,28 @@
+<div *ngIf="order" class="container-order">
+    <div class="container-fluid">
+        <div class="card" *ngFor="let stockProduct of order.stockProducts">
+            <div class="row">
+                <div class="col-md-4 d-flex align-items-center ">
+                    <img style="width: 100%;" [src]="stockProduct.product.photo ? stockProduct.product.photo : './assets/images/product-default.jpg'" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <div class="card-title d-flex justify-content-between">
+                            <h5>{{stockProduct.product.name}}</h5>
+                            <h5>{{stockProduct.product.price | currency:'BRL'}}</h5>
+                        </div>
+                        <p class="text-muted">
+                            {{stockProduct.color.name}}, {{stockProduct.size.name}}
+                        </p>
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-orange" (click)="remover(stockProduct)">Excluir</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row pt-3 pl-4 pr-4">
+            <button type="button" class="btn btn-orange flex-fill">Finalizar Pedido</button>
+        </div>
+    </div>
+</div>
