@@ -58,6 +58,11 @@ export class OrderService {
     }
   }
 
+  public clear() {
+    localStorage.setItem('currentOrder', JSON.stringify(null));
+    this.currentOrderSubject.next(null);
+  }
+
   private newOrder = {
     'visualized': false,
     'payed': false

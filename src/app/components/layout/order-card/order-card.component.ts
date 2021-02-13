@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { OrderApiService } from 'src/app/services/order-api.service';
 import { OrderService } from 'src/app/services/order.service';
 
 @Component({
@@ -10,9 +11,9 @@ export class OrderCardComponent implements OnInit {
 
   public order: any;
 
-  @Input() show : boolean = false;
+  @Input() show: boolean = false;
 
-  constructor(private orderService: OrderService) {
+  constructor(private orderService: OrderService, private orderApiService: OrderApiService) {
     this.orderService.currentOrder.subscribe((order) => {
       this.order = order;
     });
@@ -23,6 +24,15 @@ export class OrderCardComponent implements OnInit {
 
   public remover(stockProduct: any) {
     this.orderService.remover(stockProduct.id);
+  }
+
+
+  public finalityOrder() {
+    if (this.order)
+      this.orderApiService.post(this.order).subscribe((data) => {
+        console.log('data')
+        this.orderService.clear();
+      }, (error) => console.log(error));
   }
 
 }

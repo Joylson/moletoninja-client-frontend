@@ -23,7 +23,7 @@
             </div>
         </div>
         <div *ngIf="order" class="row pt-3 pb-3 pl-4 pr-4">
-            <button type="button" class="btn btn-orange flex-fill">Finalizar Pedido</button>
+            <button type="button" class="btn btn-orange flex-fill" (click)="finalityOrder()">Finalizar Pedido</button>
         </div>
     </div>
     <div *ngIf="!order" class="order-empty"></div>
