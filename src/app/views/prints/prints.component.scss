@@ -1,3 +1,13 @@
 .container-print {
     min-height: 500px;
 }
+
+.container-card-img-top {
+    height: 100%;
+}
+
+.container-card-img-top img {
+    max-height: 100%;
+    width: auto!important;
+    max-width: 100%;
+}
