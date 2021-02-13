@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { OrderService } from 'src/app/services/order.service';
 
 @Component({
@@ -9,6 +9,8 @@ import { OrderService } from 'src/app/services/order.service';
 export class OrderCardComponent implements OnInit {
 
   public order: any;
+
+  @Input() show : boolean = false;
 
   constructor(private orderService: OrderService) {
     this.orderService.currentOrder.subscribe((order) => {

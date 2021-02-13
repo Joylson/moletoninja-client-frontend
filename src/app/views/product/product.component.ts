@@ -64,7 +64,7 @@ export class ProductComponent implements OnInit, OnChanges {
   }
 
   public addStockProduct() {
-    this.orderService.addStockProductColorAndSize(this.selColor.id, this.selSize.id, this.id);
+    this.orderService.addStockProductColorAndSize(this.selColor.id, this.selSize.id, this.id, this.print);
     this.add.emit();
   }
 

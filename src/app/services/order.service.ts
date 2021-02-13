@@ -15,9 +15,11 @@ export class OrderService {
     this.currentOrder = this.currentOrderSubject.asObservable();
   }
 
-  public addStockProductColorAndSize(colorId: any, sizeId: any, productId: any) {
+  public addStockProductColorAndSize(colorId: any, sizeId: any, productId: any, print: any) {
     let order = JSON.parse(localStorage.getItem('currentOrder'));
-    this.stockProductService.getByColorAndSizeAndProduct(colorId, sizeId, productId).subscribe((data) => {
+    this.stockProductService.getByColorAndSizeAndProduct(colorId, sizeId, productId).subscribe((data: any) => {
+      if (print)
+        data.print = print;
       if (!order)
         order = this.newOrder;
       if (!order.stockProducts)

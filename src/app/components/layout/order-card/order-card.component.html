@@ -1,5 +1,5 @@
-<div *ngIf="order" class="container-order">
-    <div class="container-fluid">
+<div *ngIf="show" class="container-order">
+    <div class="container-fluid" *ngIf="order">
         <div class="card" *ngFor="let stockProduct of order.stockProducts">
             <div class="row">
                 <div class="col-md-4 d-flex align-items-center ">
@@ -14,15 +14,17 @@
                         <p class="text-muted">
                             {{stockProduct.color.name}}, {{stockProduct.size.name}}
                         </p>
-                        <div class="d-flex justify-content-end">
-                            <button type="button" class="btn btn-orange" (click)="remover(stockProduct)">Excluir</button>
+                        <div class="d-flex {{stockProduct.print ? 'justify-content-between' : 'justify-content-end'}}">
+                            <img style="max-height: 50px" *ngIf="stockProduct.print" [src]="stockProduct.print.imageFile" [alt]="stockProduct.print.name">
+                            <button type="button" class="btn btn-orange align-self-center" (click)="remover(stockProduct)">Excluir</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row pt-3 pl-4 pr-4">
+        <div *ngIf="order" class="row pt-3 pb-3 pl-4 pr-4">
             <button type="button" class="btn btn-orange flex-fill">Finalizar Pedido</button>
         </div>
     </div>
+    <div *ngIf="!order" class="order-empty"></div>
 </div>

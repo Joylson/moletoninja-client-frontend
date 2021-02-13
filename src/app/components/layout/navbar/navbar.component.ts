@@ -10,6 +10,7 @@ export class NavbarComponent implements OnInit {
 
 
   public textSearch: string;
+  public show: boolean = false;
 
   constructor(private router: Router) { }
 
@@ -24,6 +25,11 @@ export class NavbarComponent implements OnInit {
         this.router.navigate([''], { queryParams: { search: event.target['value'] } })
       else
         this.router.navigate([''])
+  }
+
+
+  public toggleShow() {
+    this.show = !this.show;
   }
 
 }
