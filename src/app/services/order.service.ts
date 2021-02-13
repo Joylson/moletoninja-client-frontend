@@ -59,7 +59,7 @@ export class OrderService {
   }
 
   public clear() {
-    localStorage.setItem('currentOrder', JSON.stringify(null));
+    localStorage.removeItem('currentOrder');
     this.currentOrderSubject.next(null);
   }
 
