@@ -1,0 +1,51 @@
+<app-loading *ngIf="loading"></app-loading>
+
+<div class="centralDiv">
+    <form class="form form-container">
+        <div class="row align-items-center">
+            <div class="col-sm-12 col-md-12">
+                <img src="assets/images/moletoninja.png" class="img-responsive img-logo">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <label for="email">e-mail</label>
+                <input [formControl]="emailFormControl" placeholder="Ex. lucas@outlook.com"
+                    [(ngModel)]="loginData.email" id="email" name="email" class="form-control">
+
+                <span *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')"
+                    class="errorSpan">
+                    Digite um e-mail válido
+                </span>
+                <span *ngIf="emailFormControl.hasError('required')" class="errorSpan">
+                    E-mail é <strong>obrigatório</strong>
+                </span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <label for="password">senha</label>
+                <div style="display: flex">
+                    <input [type]="hide ? 'password' : 'text'" [formControl]="passwordFormControl"
+                        [(ngModel)]="loginData.password" id="password" name="password" class="form-control">
+                    <button (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <i [ngClass]="{'fa fa-eye': hide, 'fa fa-eye-slash': !hide }" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <span *ngIf="passwordFormControl.hasError('required')" class="errorSpan">
+                    Senha é <strong>obrigatória</strong>
+                </span>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top: 7px; display: flex;">
+            <div class="col-sm-12 col-md-12">
+                <button [disabled]="loading" (click)="onSubmit()" class="btn btn-primary">
+                    Login
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
