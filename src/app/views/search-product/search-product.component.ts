@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 import { ColorService } from 'src/app/services/color.service';
 import { SizeService } from 'src/app/services/size.service';
@@ -28,16 +28,17 @@ export class SearchProductComponent implements OnInit {
   public models: any;
   public model: any;
 
-
   public filterSelectColor: boolean = false;
   public filterSelectSize: boolean = false;
   public filterSelectModel: boolean = false;
 
-  constructor(private productService: ProductService,
+  constructor(
+    private productService: ProductService,
     private colorService: ColorService,
     private sizeService: SizeService,
     private modalService: NgbModal,
-    private activeRoute: ActivatedRoute) { }
+    private activeRoute: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
     this.filter();
@@ -52,7 +53,7 @@ export class SearchProductComponent implements OnInit {
     });
   }
 
-  open(content, product) {
+  open(content: any, product: any) {
     this.product = product;
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg', centered: true }).result.then((result) => {
     }, (reason) => {
@@ -128,7 +129,6 @@ export class SearchProductComponent implements OnInit {
     this.filterSelectSize = false;
     this.filterSelectModel = false;
   }
-
 
   diplayFilter() {
     return { 'filter-visibled': this.filterSelectSize || this.filterSelectColor || this.filterSelectModel }

@@ -19,7 +19,7 @@ import { PrintsComponent } from './views/prints/prints.component';
 import { OrderCardComponent } from './components/layout/order-card/order-card.component';
 import { LoginComponent } from './views/login/login.component';
 import { LoadingComponent } from './components/layout/loading/loading.component';
-
+import { OrdersComponent } from './views/orders/orders.component';
 
 registerLocaleData(localePt, 'pt');
 
@@ -33,7 +33,8 @@ registerLocaleData(localePt, 'pt');
     PrintsComponent,
     OrderCardComponent,
     LoginComponent,
-    LoadingComponent
+    LoadingComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule,
