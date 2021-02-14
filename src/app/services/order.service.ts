@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { StockProductService } from './stock-product.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import Util from '../helpers/util';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +14,27 @@ export class OrderService {
   private currentOrderSubject: BehaviorSubject<any>;
   public currentOrder: Observable<any>;
 
-  constructor(private stockProductService: StockProductService) {
+  constructor(
+    private stockProductService: StockProductService,
+    private http: HttpClient
+  ) {
     this.currentOrderSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentOrder')));
     this.currentOrder = this.currentOrderSubject.asObservable();
+  }
+
+  public getByClient() {
+    return this.http.get(environment.apiURL + '/order/client/list');
+  }
+
+  public filter(order: string, direction: string, page: number, size: number, date: Date) {
+    let params = '';
+    params = Util.createParams('order', order, params);
+    params = Util.createParams('direction', direction, params);
+    params = Util.createParams('page', page, params);
+    params = Util.createParams('size', size, params);
+    params = Util.createParams('date', date != null ? moment(date).format('YYYY-MM-DD') : null, params);
+
+    return this.http.get(environment.apiURL + '/order/page/filter' + params);
   }
 
   public addStockProductColorAndSize(colorId: any, sizeId: any, productId: any, print: any) {

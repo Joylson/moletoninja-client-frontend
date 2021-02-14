@@ -20,6 +20,7 @@ import { OrderCardComponent } from './components/layout/order-card/order-card.co
 import { LoginComponent } from './views/login/login.component';
 import { LoadingComponent } from './components/layout/loading/loading.component';
 import { OrdersComponent } from './views/orders/orders.component';
+import { OrderFormComponent } from './views/order-form/order-form.component';
 
 registerLocaleData(localePt, 'pt');
 
@@ -34,7 +35,8 @@ registerLocaleData(localePt, 'pt');
     OrderCardComponent,
     LoginComponent,
     LoadingComponent,
-    OrdersComponent
+    OrdersComponent,
+    OrderFormComponent
   ],
   imports: [
     BrowserModule,
