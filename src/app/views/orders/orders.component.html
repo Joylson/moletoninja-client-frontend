@@ -6,8 +6,7 @@
     <div class="row mb-3">
         <div class="col-md-8 col-lg-2 col-sm-12 mt-2">
             <label for="data">Data</label>
-            <input class="form-control me-2" [(ngModel)]="dateText" (keypress)="search($event)" type="search" id="data"
-                placeholder="dd/mm/aaaa">
+            <input class="form-control me-2" [(ngModel)]="dateText" (keypress)="search($event)" type="search" id="data" placeholder="dd/mm/aaaa">
         </div>
     </div>
     <div class="scroll-table">
@@ -23,14 +22,13 @@
                     <td>{{ order.date | date: 'dd/MM/yyyy' }}</td>
                     <td>{{ order.user.name }}</td>
                     <td>{{ order.total | currency:'BRL':'symbol':'1.2':'pt' }}</td>
-                    <td><input class="form-control" type="checkbox" id="payed" name="payed" [checked]="order.payed"
-                            style="width: 30px" disabled></td>
+                    <td><input class="form-control" type="checkbox" id="payed" name="payed" [checked]="order.payed" style="width: 30px" disabled></td>
                     <td>
-                    <td>
-                        <a color="primary" [routerLink]="order.id">
-                            <i class="fa fa-search-plus" aria-hidden="true"></i>
-                        </a>
-                    </td>
+                        <td>
+                            <a color="primary" [routerLink]="order.id">
+                                <i class="fa fa-search-plus" aria-hidden="true"></i>
+                            </a>
+                        </td>
                 </tr>
             </tbody>
         </table>

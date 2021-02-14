@@ -73,6 +73,7 @@
     background-position-y: top;
     position: absolute;
     top: 120px;
+    z-index: -1;
 }
 
 @media (max-width: 992px) {
