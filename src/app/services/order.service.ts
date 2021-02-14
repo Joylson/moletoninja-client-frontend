@@ -22,6 +22,10 @@ export class OrderService {
     this.currentOrder = this.currentOrderSubject.asObservable();
   }
 
+  getById(id: number) {
+    return this.http.get(environment.apiURL + '/order/' + id);
+  }
+
   public getByClient() {
     return this.http.get(environment.apiURL + '/order/client/list');
   }

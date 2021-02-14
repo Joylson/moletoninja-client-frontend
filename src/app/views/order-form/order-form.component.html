@@ -1,1 +1,73 @@
-<p>order-form works!</p>
+<app-loading *ngIf="loading"></app-loading>
+
+<form class="form-container">
+    <div class="row">
+        <h1>Detalhes do pedido</h1>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-2">
+            <label for="id">Código</label>
+            <input type="text" class="form-control" id="id" placeholder="Código do pedido" [(ngModel)]="order.id"
+                name="id" disabled>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <label for="parceiro">Parceiro</label>
+            <input type="text" class="form-control" id="parceiro" placeholder="Parceiro" [(ngModel)]="order.partner"
+                name="parceiro" disabled>
+        </div>
+        <div class="col-sm-12 col-md-2">
+            <label for="data">Data</label>
+            <input class="form-control" placeholder="Data do pedido" name="dp" [(ngModel)]="order.date" id="data"
+                disabled>
+        </div>
+        <div class="col-sm12 col-md-2">
+            <label for="data">Pago</label>
+            <input class="form-control" type="checkbox" id="payed" name="payed" [checked]="order.payed"
+                [(ngModel)]="order.payed" style="width: 30px" disabled>
+        </div>
+    </div>
+
+    <br />
+    <hr />
+
+    <h1>Itens do pedido</h1>
+
+    <div class="scroll-table">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nome</th>
+                    <th>Cor</th>
+                    <th>Tamanho</th>
+                    <th>Quantidade</th>
+                    <th>Unitário</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of order.orderProducts; index as i">
+                    <td>{{ item.stockProduct.product.id }}</td>
+                    <td>{{ item.stockProduct.product.name }}</td>
+                    <td style="display: flex">{{ item.stockProduct.color.name }} <div class="circle"
+                            [ngStyle]="{'background-color': '#' + item.stockProduct.color.hexadecimal}"></div>
+                    </td>
+                    <td>{{ item.stockProduct.size.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.price | currency:'BRL':'symbol':'1.2':'pt' }}</td>
+                    <td>{{ item.price * item.quantity | currency:'BRL':'symbol':'1.2':'pt' }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr />
+        <div class="row">
+            <div class="col-sm-12 col-md-12 rowTotal">
+                <strong>Total: {{order.total | currency:'BRL':'symbol':'1.2':'pt'}}</strong>
+            </div>
+        </div>
+    </div>
+
+    <div class="rowSalvar">
+        <button class="btn btn-cancelar" (click)="close()">Voltar</button>
+    </div>
+</form>
