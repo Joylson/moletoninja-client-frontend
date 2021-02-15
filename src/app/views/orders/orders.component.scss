@@ -15,10 +15,40 @@
     }
 }
 
-a{
-    color:black;
+.container-order {
+    position: fixed;
+    top: 120px;
+    right: 0;
+    width: 30%;
+    height: calc(100vh - 120px);
+    z-index: 1028;
+    background-color: white;
+    box-shadow: 0 -2px 8px black;
 }
 
-a:hover{
-    color: #fc6616
+.card {
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0;
+}
+
+.order-empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../../../assets/images/order-empty.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+    background-size: 30% auto;
+    opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+    .container-order {
+        width: 100%;
+        top: 76px;
+        height: calc(100vh - 76px);
+        overflow-y: auto;
+    }
 }
