@@ -8,13 +8,23 @@
         </div>
     </div>
     <div class="col-md-6 p-4 ml-4 d-flex align-items-center justify-content-center">
-        <img [src]="product.photo" class="card-img" alt="" srcset="">
+        <img [src]="product.photo" class="card-img" alt="" srcset="" onerror="this.src = './assets/images/product-default.jpg'">
     </div>
     <div class="col-md-5 pr-md-0 ml-md-2 p-3 p-md-2">
         <div class="card-title model-title d-none d-lg-block">
             {{product.name}}
         </div>
-        <div class="card-price">{{product.price | currency :'BRL'}}</div>
+        <div class="card-price">
+            <div *ngIf="!print" class="d-flex flex-column">
+                <p class="m-0">{{product.price | currency :'BRL'}}</p>
+                <p class="text-muted m-0" style="font-size: 12px;">ESTAMPADO: {{product.stampedPrice | currency :'BRL'}}
+                </p>
+            </div>
+            <div *ngIf="print" class="d-flex flex-column">
+                <p class="m-0">{{product.stampedPrice | currency :'BRL'}}</p>
+                <p class="text-danger m-0" style="font-size: 12px; text-decoration: line-through;">SEM ESTAMPA: {{product.price | currency :'BRL'}}</p>
+            </div>
+        </div>
         <div class="mt-3">
             <label class="text-muted pr-2">Tamanho:</label>
             <label>{{selSize ? selSize.name : ''}}</label>
@@ -30,7 +40,8 @@
             <ul class="navbar-nav d-flex flex-row flex-wrap">
                 <li *ngFor="let color of colors" class="nav-item me-auto mr-3 mb-2 mb-0 mt-1 mt-2">
                     <a type="button" (click)="selectColor(color)">
-                        <div class="circle" [style]="{'background-color': '#' + color.hexadecimal, 'border-color' : selColor  && color.id === selColor.id ?  '#ff9d35' : '#203A43'}"></div>
+                        <div class="circle" [style]="{'background-color': '#' + color.hexadecimal, 'border-color' : selColor  && color.id === selColor.id ?  '#ff9d35' : '#203A43'}">
+                        </div>
                     </a>
                 </li>
             </ul>
@@ -44,6 +55,9 @@
                     <i class="fas fa-shopping-cart"></i> Adicionar Carrinho
                 </button>
             </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <p class="text-danger mt-1" style="font-size: 15px;">{{msg}}</p>
         </div>
     </div>
 </div>

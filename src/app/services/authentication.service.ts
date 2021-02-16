@@ -20,6 +20,11 @@ export class AuthenticationService {
     return this.currentTokenSubject.value;
   }
 
+
+  public get isLogged(): any {
+    return !(!this.currentTokenSubject.value);
+  }
+
   login(userdata: any) {
     return this.tokenService.post(userdata)
       .pipe(map(user => {
@@ -35,4 +40,6 @@ export class AuthenticationService {
     localStorage.removeItem('currentToken');
     this.currentTokenSubject.next(null);
   }
+
+
 }

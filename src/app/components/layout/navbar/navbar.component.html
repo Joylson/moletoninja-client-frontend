@@ -6,8 +6,9 @@
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Visualizar menu">
             <i class="fa fa-bars text-white fa-md"></i>
         </button>
-        <button type="button" class="d-block d-lg-none navbar-toggler collapsed" (click)="toggleShow()" style="cursor: pointer;" aria-label="Carrinho de compra">
+        <button type="button" class="d-block d-lg-none navbar-toggler collapsed d-flex justify-content-center align-items-stretch" (click)="toggleShow()" style="cursor: pointer;" aria-label="Carrinho de compra">
             <i class="fas fa-shopping-cart text-white fa-md"></i>
+            <div *ngIf="order && order.stockProducts" class="d-flex align-items-end justify-content-center text-white" style="font-size: 15px;margin-bottom: -4px;">{{order.stockProducts.length}}</div>
         </button>
     </div>
     <form class="d-none d-lg-block">
@@ -83,9 +84,10 @@
                 <li class="nav-item me-auto ml-lg-2 mr-lg-2 mb-2 mb-lg-0 mt-lg-1 mt-3">
                     <div class="icon"><i class="far fa-heart text-black fa-lg  text-white"></i></div>
                 </li>
-                <li class="nav-item me-auto ml-lg-2 mr-lg-2 mb-2 mb-lg-0 mt-lg-1 mt-3">
-                    <a class="icon" (click)="toggleShow()" style="cursor: pointer;"><i
+                <li class="nav-item me-auto ml-lg-2 mr-lg-2 mb-2 mb-lg-0 mt-lg-1 mt-3 d-flex justify-content-center align-items-stretch" style="cursor: pointer;" (click)="toggleShow()">
+                    <a class="icon" style="cursor: pointer;"><i
                             class="fas fa-shopping-cart text-black fa-lg text-white"></i></a>
+                    <div *ngIf="order && order.stockProducts" class="d-flex align-items-end justify-content-center text-white">{{order.stockProducts.length}}</div>
                 </li>
             </ul>
         </div>

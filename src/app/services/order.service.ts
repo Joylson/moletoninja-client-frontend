@@ -41,13 +41,13 @@ export class OrderService {
     return this.http.get(environment.apiURL + '/order/page/filter' + params);
   }
 
-  public addStockProductColorAndSize(colorId: any, sizeId: any, productId: any, print: any) {
-    let order = JSON.parse(localStorage.getItem('currentOrder'));
+  public async addStockProductColorAndSize(colorId: any, sizeId: any, productId: any, print: any) {
+    let order = await JSON.parse(localStorage.getItem('currentOrder'));
     this.stockProductService.getByColorAndSizeAndProduct(colorId, sizeId, productId).subscribe((data: any) => {
       if (print)
         data.print = print;
       if (!order)
-        order = this.newOrder;
+        order = this.newOrder();
       if (!order.stockProducts)
         order.stockProducts = [];
       if (this.validStock(order.stockProducts, data)) {
@@ -72,8 +72,8 @@ export class OrderService {
     this.currentOrderSubject.next(null);
   }
 
-  public remover(id: any) {
-    let order = JSON.parse(localStorage.getItem('currentOrder'));
+  public async remover(id: any) {
+    let order = await JSON.parse(localStorage.getItem('currentOrder'));
     if (order) {
       order.stockProducts = order.stockProducts.filter((sp) => sp.id !== id);
       if (order.stockProducts.length === 0) {
@@ -89,9 +89,11 @@ export class OrderService {
     this.currentOrderSubject.next(null);
   }
 
-  private newOrder = {
-    'visualized': false,
-    'payed': false
-  };
+  private newOrder = () => {
+    return {
+      'visualized': false,
+      'payed': false
+    };
+  }
 
 }

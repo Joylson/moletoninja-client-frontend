@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OrderService } from 'src/app/services/order.service';
 import { ProductService } from 'src/app/services/product.service';
-import { StockProductService } from 'src/app/services/stock-product.service';
 
 @Component({
   selector: 'app-product',
@@ -26,6 +25,8 @@ export class ProductComponent implements OnInit, OnChanges {
   public selSize: any;
   public print: any;
 
+  public msg: string;
+
   constructor(private productService: ProductService,
     private modalService: NgbModal,
     private orderService: OrderService) { }
@@ -35,9 +36,6 @@ export class ProductComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.orderService.currentOrder.subscribe((data) => {
-      console.log(data)
-    });
   }
 
 
@@ -63,17 +61,28 @@ export class ProductComponent implements OnInit, OnChanges {
     });
   }
 
-  public addStockProduct() {
+  public async addStockProduct() {
+    if (!this.selColor) {
+      this.msg = 'não foi selecionado a cor';
+      return;
+    }
+    if (!this.selSize) {
+      this.msg = 'não foi selecionado o tamanho';
+      return;
+    }
+    this.msg = null;
     this.orderService.addStockProductColorAndSize(this.selColor.id, this.selSize.id, this.id, this.print);
     this.add.emit();
   }
 
 
   selectColor(color: any) {
+    this.msg = null;
     this.selColor = color;
   }
 
   selectSize(size: any) {
+    this.msg = null;
     this.selSize = size;
   }
 
