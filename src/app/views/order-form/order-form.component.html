@@ -35,35 +35,35 @@
 
         <h1>Itens do pedido</h1>
 
-        <div class="scroll-table">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Nome</th>
-                        <th>Cor</th>
-                        <th>Tamanho</th>
-                        <th>Quantidade</th>
-                        <th>Unitário</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of order.orderProducts; index as i">
-                        <td>{{ item.stockProduct.product.id }}</td>
-                        <td>{{ item.stockProduct.product.name }}</td>
-                        <td style="display: flex">{{ item.stockProduct.color.name }} <div class="circle"
-                                [ngStyle]="{'background-color': '#' + item.stockProduct.color.hexadecimal}"></div>
-                        </td>
-                        <td>{{ item.stockProduct.size.name }}</td>
-                        <td>{{ item.quantity }}</td>
-                        <td>{{ item.price | currency:'BRL':'symbol':'1.2':'pt' }}</td>
-                        <td>{{ item.price * item.quantity | currency:'BRL':'symbol':'1.2':'pt' }}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <hr />
-            <div class="row">
+        <div class="container-fluid">
+            <div class="card" *ngFor="let item of order.orderProducts; index as i">
+                <div class="row">
+                    <div class="col-md-2 d-flex align-items-center ">
+                        <img [src]="item.stockProduct.product.photo ? item.stockProduct.product.photo : './assets/images/product-default.jpg'"
+                            alt="..." style="max-height: 100px;">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="card-body">
+                            <div class="card-title d-flex justify-content-between">
+                                <h5><strong>{{ item.stockProduct.product.id + ' - ' + item.stockProduct.product.name }}</strong></h5>
+                                <h5 style="display: flex">{{ item.stockProduct.color.name }}
+                                    <div class="circle"
+                                        [ngStyle]="{'background-color': '#' + item.stockProduct.color.hexadecimal}">
+                                    </div>
+                                </h5>
+                                <h5>{{ 'Tamanho: ' + item.stockProduct.size.name }}</h5>
+                                <h5>{{ 'Quantidade: ' + (item.quantity) }}</h5>
+                            </div>
+                            <div>
+                                <h5><strong>Vl. Unitário: </strong>{{ (item.price | currency:'BRL':'symbol':'1.2':'pt') }}</h5>
+                                <h5><strong>Vl. Total: </strong>{{ (item.price * item.quantity | currency:'BRL':'symbol':'1.2':'pt')
+                                    }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 7px">
                 <div class="col-sm-12 col-md-12 rowTotal">
                     <strong>Total: {{order.total | currency:'BRL':'symbol':'1.2':'pt'}}</strong>
                 </div>

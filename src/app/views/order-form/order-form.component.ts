@@ -42,6 +42,8 @@ export class OrderFormComponent implements OnInit {
               this.order.date = moment(this.order.date).format('DD/MM/YYYY');
 
               this.loading = false;
+
+              console.log(this.order.orderProducts);
             },
             (error: any) => {
               this.loading = false;
