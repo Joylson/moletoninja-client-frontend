@@ -2,20 +2,18 @@
 
 <app-navbar></app-navbar>
 
-<div class="container-fluid container-main">
+<div class="container-fluid container-main container-main-white">
     <div class="row mb-3">
         <div class="col-md-8 col-lg-2 col-sm-12 mt-2">
             <label for="data">Data</label>
-            <input class="form-control me-2" [(ngModel)]="dateText" (keypress)="search($event)" type="search" id="data"
-                placeholder="dd/mm/aaaa">
+            <input class="form-control me-2" [(ngModel)]="dateText" (keypress)="search($event)" type="search" id="data" placeholder="dd/mm/aaaa">
         </div>
     </div>
     <div class="container-fluid">
         <div class="card" *ngFor="let order of orders">
             <div class="row">
                 <div class="col-md-4 d-flex align-items-center ">
-                    <img style="width: 100%;" [src]="'./assets/images/order-empty.png'" alt="..."
-                        style="max-height: 100px;">
+                    <img style="width: 100%;" [src]="'./assets/images/order-empty.png'" alt="..." style="max-height: 100px;">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">

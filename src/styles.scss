@@ -133,3 +133,28 @@ a {
     color: white;
     background-color: #9E1C4C;
 }
+
+.container-main-white {
+    margin-top: 130px !important;
+    background-color: white;
+    border-radius: 5px;
+    width: calc(100% - 30px);
+    margin-left: 15px;
+    margin-right: 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 5px rgb(0 0 0 / 15%);
+}
+
+.text-title {
+    color: rgba(0, 0, 0, .8);
+    font-weight: 600;
+    letter-spacing: .0125rem;
+    overflow-wrap: break-word;
+    font-size: 1.5rem;
+}
+
+@media (max-width: 992px) {
+    .container-main-white {
+        margin-top: 200px !important;
+    }
+}

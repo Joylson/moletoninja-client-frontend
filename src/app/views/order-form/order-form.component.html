@@ -2,71 +2,62 @@
 
 <app-navbar></app-navbar>
 
-<div class="container-fluid container-main" style="background-color: white; padding: 30px;">
+<div class="container-fluid container-main container-main-white" style="background-color: white; padding: 30px;">
     <form class="form-container">
-        <div class="row">
-            <h1>Detalhes do pedido</h1>
-        </div>
+        <h1 class="text-title">Detalhes do pedido</h1>
         <div class="row">
             <div class="col-sm-12 col-md-2">
                 <label for="id">Código</label>
-                <input type="text" class="form-control" id="id" placeholder="Código do pedido" [(ngModel)]="order.id"
-                    name="id" disabled>
+                <input type="text" class="form-control" id="id" placeholder="Código do pedido" [(ngModel)]="order.id" name="id" disabled>
             </div>
             <div class="col-sm-12 col-md-4">
                 <label for="parceiro">Parceiro</label>
-                <input type="text" class="form-control" id="parceiro" placeholder="Parceiro" [(ngModel)]="order.partner"
-                    name="parceiro" disabled>
+                <input type="text" class="form-control" id="parceiro" placeholder="Parceiro" [(ngModel)]="order.partner" name="parceiro" disabled>
             </div>
             <div class="col-sm-12 col-md-2">
                 <label for="data">Data</label>
-                <input class="form-control" placeholder="Data do pedido" name="dp" [(ngModel)]="order.date" id="data"
-                    disabled>
+                <input class="form-control" placeholder="Data do pedido" name="dp" [(ngModel)]="order.date" id="data" disabled>
             </div>
             <div class="col-sm12 col-md-2">
                 <label for="data">Pago</label>
-                <input class="form-control" type="checkbox" id="payed" name="payed" [checked]="order.payed"
-                    [(ngModel)]="order.payed" style="width: 30px" disabled>
+                <input class="form-control" type="checkbox" id="payed" name="payed" [checked]="order.payed" [(ngModel)]="order.payed" style="width: 30px" disabled>
             </div>
         </div>
-
         <br />
         <hr />
 
-        <h1>Itens do pedido</h1>
+        <h1 class="text-title">Itens do pedido</h1>
 
-        <div class="container-fluid">
-            <div class="card" *ngFor="let item of order.orderProducts; index as i">
-                <div class="row">
-                    <div class="col-md-2 d-flex align-items-center ">
-                        <img [src]="item.stockProduct.product.photo ? item.stockProduct.product.photo : './assets/images/product-default.jpg'"
-                            alt="..." style="max-height: 100px;">
-                    </div>
-                    <div class="col-md-10">
-                        <div class="card-body">
-                            <div class="card-title d-flex justify-content-between">
-                                <h5><strong>{{ item.stockProduct.product.id + ' - ' + item.stockProduct.product.name }}</strong></h5>
-                                <h5 style="display: flex">{{ item.stockProduct.color.name }}
-                                    <div class="circle"
-                                        [ngStyle]="{'background-color': '#' + item.stockProduct.color.hexadecimal}">
-                                    </div>
-                                </h5>
-                                <h5>{{ 'Tamanho: ' + item.stockProduct.size.name }}</h5>
-                                <h5>{{ 'Quantidade: ' + (item.quantity) }}</h5>
-                            </div>
-                            <div>
-                                <h5><strong>Vl. Unitário: </strong>{{ (item.price | currency:'BRL':'symbol':'1.2':'pt') }}</h5>
-                                <h5><strong>Vl. Total: </strong>{{ (item.price * item.quantity | currency:'BRL':'symbol':'1.2':'pt')
-                                    }}</h5>
-                            </div>
+        <div class="card mt-2" *ngFor="let item of order.orderProducts; index as i">
+            <div class="row">
+                <div class="col-md-2 d-flex align-items-center ">
+                    <img [src]="item.stockProduct.product.photo ? item.stockProduct.product.photo : './assets/images/product-default.jpg'" alt="..." style="max-height: 100px;">
+                </div>
+                <div class="col-md-10">
+                    <div class="card-body">
+                        <div class="card-title d-flex justify-content-between">
+                            <h5><strong>{{ item.stockProduct.product.id + ' - ' + item.stockProduct.product.name
+                                    }}</strong></h5>
+                            <h5 style="display: flex">{{ item.stockProduct.color.name }}
+                                <div class="circle" [ngStyle]="{'background-color': '#' + item.stockProduct.color.hexadecimal}">
+                                </div>
+                            </h5>
+                            <h5>{{ 'Tamanho: ' + item.stockProduct.size.name }}</h5>
+                            <h5>{{ 'Quantidade: ' + (item.quantity) }}</h5>
+                        </div>
+                        <div>
+                            <h5><strong>Vl. Unitário: </strong>{{ (item.price | currency:'BRL':'symbol':'1.2':'pt') }}
+                            </h5>
+                            <h5><strong>Vl. Total: </strong>{{ (item.price * item.quantity | currency:'BRL':'symbol':'1.2':'pt') }}
+                            </h5>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row" style="margin-top: 7px">
-                <div class="col-sm-12 col-md-12 rowTotal">
-                    <strong>Total: {{order.total | currency:'BRL':'symbol':'1.2':'pt'}}</strong>
-                </div>
+        </div>
+        <div class="row" style="margin-top: 7px">
+            <div class="col-sm-12 col-md-12 rowTotal">
+                <strong>Total: {{order.total | currency:'BRL':'symbol':'1.2':'pt'}}</strong>
             </div>
         </div>
 
