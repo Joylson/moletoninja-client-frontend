@@ -14,4 +14,19 @@
 
 .card-img-print {
     max-height: 178px;
+    max-width: 100%;
+}
+
+.card-img-print-container {
+    cursor: pointer;
+    height: 178px;
+}
+
+@media (max-width: 768px) {
+    .card-img-print {
+        max-height: none;
+    }
+    .card-img-print-container {
+        height: auto;
+    }
 }

@@ -134,4 +134,13 @@ export class SearchProductComponent implements OnInit {
     return { 'filter-visibled': this.filterSelectSize || this.filterSelectColor || this.filterSelectModel }
   }
 
+  onover(product) {
+    console.log('teste')
+    if (product.typePhoto) {
+      product.typePhoto = true;
+    } else {
+      product.typePhoto = false;
+    }
+  }
+
 }

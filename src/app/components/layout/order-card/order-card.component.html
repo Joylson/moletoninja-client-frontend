@@ -2,7 +2,7 @@
     <div class="container-fluid" *ngIf="order">
         <div class="card" *ngFor="let stockProduct of order.stockProducts">
             <div class="row">
-                <div class="col-md-4 d-flex align-items-center ">
+                <div class="col-md-4 d-flex justify-content-center align-items-center card-img-left p-2">
                     <img style="width: 100%;" [src]="stockProduct.product.photo ? stockProduct.product.photo : './assets/images/product-default.jpg'" alt="...">
                 </div>
                 <div class="col-md-8">

@@ -27,6 +27,16 @@
     opacity: 0.5;
 }
 
+.card-img-left {
+    height: 158px;
+}
+
+.card-img-left img {
+    max-height: 100%;
+    width: auto !important;
+    max-width: 100%;
+}
+
 @media (max-width: 768px) {
     .container-order {
         width: 100%;

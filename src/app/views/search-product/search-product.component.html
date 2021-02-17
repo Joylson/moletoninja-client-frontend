@@ -63,7 +63,7 @@
         <div *ngFor="let product of products" class="col mt-3">
             <div class="card card-default h-100 pt-2">
                 <div class="d-flex justify-content-center container-card-img-top">
-                    <img [src]="product.photo" class="card-img-top" [alt]="product.name" onerror="this.src = './assets/images/product-default.jpg'">
+                    <img [src]="product.typePhoto ? product.photo2 : product.photo" class="card-img-top" (mouseenter)="product.typePhoto = product.photo2 ? true : false;" (mouseleave)="product.typePhoto = false;" [alt]="product.name" onerror="this.src = './assets/images/product-default.jpg'">
                 </div>
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title d-flex justify-content-between">
