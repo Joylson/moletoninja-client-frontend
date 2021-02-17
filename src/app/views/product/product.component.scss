@@ -30,3 +30,19 @@
         height: auto;
     }
 }
+
+.img-kit {
+    height: 110px;
+    width: 104px;
+    min-width: 104px;
+    // cursor: pointer;
+}
+
+.img-kit img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.overflow-scroll-x {
+    overflow-x: auto;
+}

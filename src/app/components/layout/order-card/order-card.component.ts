@@ -31,7 +31,17 @@ export class OrderCardComponent implements OnInit {
     this.orderService.remover(stockProduct.id);
   }
 
+  public addQtd(stockProduct) {
+    console.log(stockProduct.quantity )
+    if (stockProduct.quantitySel < stockProduct.quantity)
+      stockProduct.quantitySel++;
+  }
 
+
+  public removeQtd(stockProduct) {
+    if (stockProduct.quantitySel > 1)
+      stockProduct.quantitySel--;
+  }
 
 
   public finalityOrder() {

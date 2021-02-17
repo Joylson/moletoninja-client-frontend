@@ -25,7 +25,15 @@
                 <p class="text-danger m-0" style="font-size: 12px; text-decoration: line-through;">SEM ESTAMPA: {{product.price | currency :'BRL'}}</p>
             </div>
         </div>
-        <div class="mt-3">
+        <div *ngIf="product.kits.length" class="mt-3">
+            <label class="text-muted pr-2 mb-2">Kit:</label>
+            <div class="d-flex d-flex align-items-center justify-content-start overflow-scroll-x flex-nowrap">
+                <div *ngFor="let kit of product.kits" class="card align-items-center justify-content-center card-img-print-container img-kit p-1 mt-1 mb-1 mr-1">
+                    <img class="card-img-print" [src]="kit.product ? kit.product.photo : './assets/images/print-product.png'">
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!product.kits.length" class="mt-3">
             <label class="text-muted pr-2">Tamanho:</label>
             <label>{{selSize ? selSize.name : ''}}</label>
             <ul class="navbar-nav d-flex flex-row flex-wrap">
@@ -34,7 +42,7 @@
                 </li>
             </ul>
         </div>
-        <div class="mt-3">
+        <div *ngIf="!product.kits.length" class="mt-3">
             <label class="text-muted pr-2">Cor:</label>
             <label>{{selColor ? selColor.name : ''}}</label>
             <ul class="navbar-nav d-flex flex-row flex-wrap">
@@ -46,8 +54,11 @@
                 </li>
             </ul>
         </div>
-        <div class="card mt-3 align-items-center justify-content-center card-img-print-container" (click)="open(content)">
-            <img class="card-img-print" [src]="print ? print.imageFile : './assets/images/print-product.png'">
+        <div class="mt-1">
+            <label class="text-muted pr-2 mb-2">Estampa:</label>
+            <div class="card align-items-center justify-content-center card-img-print-container" (click)="open(content)">
+                <img class="card-img-print" [src]="print ? print.imageFile : './assets/images/print-product.png'">
+            </div>
         </div>
         <div class="card mt-3">
             <div class="d-flex">

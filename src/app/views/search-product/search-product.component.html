@@ -53,7 +53,7 @@
         </a>
     </div>
     <div class="modal-body">
-        <app-product [id]="product.id" (add)="modal.dismiss('Cross click')"></app-product>
+        <app-product [id]="product.id" (add)="add(modal, content, $event)"></app-product>
     </div>
 </ng-template>
 

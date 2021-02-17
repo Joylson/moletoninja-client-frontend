@@ -61,6 +61,13 @@ export class SearchProductComponent implements OnInit {
     });
   }
 
+  public add(modal, content, product){
+    modal.dismiss('Cross click');
+    // if(product){
+    //   this.open(content, product);
+    // }
+  }
+
   selectColor(color) {
     this.color = color;
     this.filterSelectColor = false;
@@ -121,7 +128,8 @@ export class SearchProductComponent implements OnInit {
 
   modelsReload = () => [
     { name: 'Masculino', type: 'M' },
-    { name: 'Feminino', type: 'F' }
+    { name: 'Feminino', type: 'F' },
+    { name: 'Unissex', type: 'U' }
   ];
 
   filterNone() {

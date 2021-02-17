@@ -51,6 +51,7 @@ export class OrderService {
       if (!order.stockProducts)
         order.stockProducts = [];
       if (this.validStock(order.stockProducts, data)) {
+        data.quantitySel = 1;
         order.stockProducts.push(data);
         localStorage.setItem('currentOrder', JSON.stringify(order));
         this.currentOrderSubject.next(order);

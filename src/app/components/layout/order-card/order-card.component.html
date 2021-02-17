@@ -9,14 +9,25 @@
                     <div class="card-body">
                         <div class="card-title d-flex justify-content-between">
                             <h5>{{stockProduct.product.name}}</h5>
-                            <h5>{{stockProduct.product.price | currency:'BRL'}}</h5>
+                            <h5>{{(stockProduct.print ? stockProduct.product.stampedPrice : stockProduct.product.price) * stockProduct.quantitySel | currency:'BRL'}}</h5>
                         </div>
-                        <p class="text-muted">
-                            {{stockProduct.color.name}}, {{stockProduct.size.name}}
-                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="text-muted">
+                                {{stockProduct.color.name}}, {{stockProduct.size.name}}
+                            </p>
+                            <div class="d-flex input-group " style="width: 100px;">
+                                <span class="input-group-text input-group-text-left" style="cursor: pointer;" (click)="removeQtd(stockProduct)">
+                                    <i class="fas fa-angle-double-down fa-sm"></i>
+                                </span>
+                                <input id="password" name="password" class="form-control" readonly style="background-color: white;" [ngModel]="stockProduct.quantitySel">
+                                <span class="input-group-text input-group-text-right" style="cursor: pointer;" (click)="addQtd(stockProduct)">
+                                    <i class="fas fa-angle-double-up fa-sm"></i>
+                                </span>
+                            </div>
+                        </div>
                         <div class="d-flex {{stockProduct.print ? 'justify-content-between' : 'justify-content-end'}}">
                             <img style="max-height: 50px" *ngIf="stockProduct.print" [src]="stockProduct.print.imageFile" [alt]="stockProduct.print.name">
-                            <button type="button" class="btn btn-orange align-self-center" (click)="remover(stockProduct)">Excluir</button>
+                            <button style="width: 100px;" type="button" class="btn btn-orange align-self-center mt-2 mb-2" (click)="remover(stockProduct)">Excluir</button>
                         </div>
                     </div>
                 </div>

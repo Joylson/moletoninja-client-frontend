@@ -13,7 +13,7 @@ export class ProductComponent implements OnInit, OnChanges {
 
   @Input() id: number;
 
-  @Output() add = new EventEmitter();
+  @Output() add = new EventEmitter<any>();
 
   //dados carregado
   public product: any;
@@ -72,7 +72,11 @@ export class ProductComponent implements OnInit, OnChanges {
     }
     this.msg = null;
     this.orderService.addStockProductColorAndSize(this.selColor.id, this.selSize.id, this.id, this.print);
-    this.add.emit();
+    this.add.emit(null);
+  }
+
+  public selProduct(product) {
+    this.add.emit(product);
   }
 
 
