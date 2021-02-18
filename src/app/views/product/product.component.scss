@@ -46,3 +46,28 @@
 .overflow-scroll-x {
     overflow-x: auto;
 }
+
+.itens-product-kit {
+    height: 30px;
+    margin-top: -5px;
+    right: -3px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.circle-itens-product-kit {
+    border: none;
+    height: 15px;
+    width: 16px;
+}
+
+.card-itens-product-kit {
+    background-color: white;
+    border-radius: 5px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 5px rgb(0 0 0 / 15%);
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    height: 30px;
+    width: 30px;
+}

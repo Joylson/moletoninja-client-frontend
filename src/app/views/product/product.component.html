@@ -28,7 +28,17 @@
         <div *ngIf="product.kits.length" class="mt-3">
             <label class="text-muted pr-2 mb-2">Kit:</label>
             <div class="d-flex d-flex align-items-center justify-content-start overflow-scroll-x flex-nowrap">
-                <div *ngFor="let kit of product.kits" class="card align-items-center justify-content-center card-img-print-container img-kit p-1 mt-1 mb-1 mr-1">
+                <div *ngFor="let kit of product.kits" class="card align-items-center justify-content-center card-img-print-container img-kit p-1 mt-1 mb-1 mr-1" (click)="openKitProduct(contentproduct, kit.product)">
+                    <div *ngIf="getStockProduct(kit.product)" class="itens-product-kit d-flex align-items-center justify-content-end">
+                        <div *ngIf="getStockProduct(kit.product).print" class="card-itens-product-kit d-flex justify-content-center align-items-center" style="margin-right: 2px;">
+                            <img class="card-img-print" [src]="getStockProduct(kit.product).print ? getStockProduct(kit.product).print.imageFile : './assets/images/print-product.png'">
+                        </div>
+                        <div class="card-itens-product-kit d-flex justify-content-center align-items-center" style="margin-right: 2px;">{{getStockProduct(kit.product).size.name}}</div>
+                        <div class="card-itens-product-kit d-flex justify-content-center align-items-center">
+                            <div class="circle circle-itens-product-kit" [style]="{'background-color': '#' + getStockProduct(kit.product).color.hexadecimal}">
+                            </div>
+                        </div>
+                    </div>
                     <img class="card-img-print" [src]="kit.product ? kit.product.photo : './assets/images/print-product.png'">
                 </div>
             </div>
@@ -56,14 +66,18 @@
         </div>
         <div class="mt-1">
             <label class="text-muted pr-2 mb-2">Estampa:</label>
-            <div class="card align-items-center justify-content-center card-img-print-container" (click)="open(content)">
+            <div class="card align-items-center justify-content-center card-img-print-container" (click)="openPrint(content)">
                 <img class="card-img-print" [src]="print ? print.imageFile : './assets/images/print-product.png'">
             </div>
         </div>
         <div class="card mt-3">
-            <div class="d-flex">
-                <button type="button" class="btn btn-orange flex-fill" (click)="addStockProduct()">
+            <div class="d-flex justify-content-center">
+                <app-spinner *ngIf="loading"></app-spinner>
+                <button *ngIf="!kit && !loading" type="button" class="btn btn-orange flex-fill" (click)="addStockProduct()">
                     <i class="fas fa-shopping-cart"></i> Adicionar Carrinho
+                </button>
+                <button *ngIf="kit && !loading" type="button" class="btn btn-orange flex-fill" (click)="addKitProduct()">
+                    <i class="fas fa-plus"></i> Selcionar Item Do Kit
                 </button>
             </div>
         </div>
@@ -89,5 +103,19 @@
     </div>
     <div class="modal-body">
         <app-prints (print)="printSelect($event, modal)"></app-prints>
+    </div>
+</ng-template>
+
+
+<ng-template #contentproduct let-modalproduct>
+    <div class="modal-header d-flex justify-content-start justify-content-md-end pl-2 pl-md-0 pt-2 pb-2 pt-md-0 pb-md-0">
+        <a class="model-close" type="button" (click)="modalproduct.dismiss('Cross click')">
+            <i class="fas fa-close d-none d-lg-block"></i>
+            <i class="fas fa-arrow-left text-orange d-block d-lg-none" style="font-size: 22px;"></i>
+        </a>
+    </div>
+    <div class="modal-body">
+        <app-product [id]="productKit.id" [kit]="true" (add)="addKit(modalproduct, contentproduct, $event)">
+        </app-product>
     </div>
 </ng-template>
