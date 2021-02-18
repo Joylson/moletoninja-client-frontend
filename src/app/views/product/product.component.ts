@@ -11,7 +11,6 @@ import { StockProductService } from 'src/app/services/stock-product.service';
 })
 export class ProductComponent implements OnInit, OnChanges {
 
-
   @Input() id: number;
 
   @Input() kit: boolean = false;
@@ -119,6 +118,13 @@ export class ProductComponent implements OnInit, OnChanges {
   selectColor(color: any) {
     this.msg = null;
     this.selColor = color;
+
+    let colorPhoto = this.product.productColorPhotos.filter(photo => photo.color.id == color.id);
+    if(colorPhoto && colorPhoto.length > 0) {
+      this.product.photo = colorPhoto[0].photo;
+    }
+
+    console.log(this.product.photo);
   }
 
   selectSize(size: any) {
