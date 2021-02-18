@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 import { ColorService } from 'src/app/services/color.service';
 import { SizeService } from 'src/app/services/size.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-search-product',
@@ -28,6 +29,11 @@ export class SearchProductComponent implements OnInit {
   public models: any;
   public model: any;
 
+  //pagination
+  public page: number = 1;
+  public sizePage: number = 1;
+  public pageSize: number = 1;
+
   public filterSelectColor: boolean = false;
   public filterSelectSize: boolean = false;
   public filterSelectModel: boolean = false;
@@ -38,17 +44,23 @@ export class SearchProductComponent implements OnInit {
     private sizeService: SizeService,
     private modalService: NgbModal,
     private activeRoute: ActivatedRoute
-  ) { }
+  ) {
+    this.pageSize = environment.page;
+  }
 
   ngOnInit(): void {
     this.filter();
   }
 
+
+
+
   filter() {
     this.activeRoute.queryParams.subscribe(params => {
       let search = params['search'];
-      this.productService.filter('id', 'ASC', this.model ? this.model.type : null, 1, 30, search, this.size ? this.size.id : null, this.color ? this.color.id : null).subscribe((data) => {
+      this.productService.filter('id', 'ASC', this.model ? this.model.type : null, this.page, environment.page, search, this.size ? this.size.id : null, this.color ? this.color.id : null).subscribe((data) => {
         this.products = data['docs'];
+        this.sizePage = data['total'];
       })
     });
   }
@@ -61,7 +73,7 @@ export class SearchProductComponent implements OnInit {
     });
   }
 
-  public add(modal, content, product){
+  public add(modal, content, product) {
     modal.dismiss('Cross click');
     // if(product){
     //   this.open(content, product);

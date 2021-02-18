@@ -26,8 +26,15 @@ export class OrderService {
     return this.http.get(environment.apiURL + '/order/' + id);
   }
 
-  public getByClient() {
-    return this.http.get(environment.apiURL + '/order/client/list');
+  public getByClient(order: string, direction: string, page: number, size: number, date: Date) {
+    let params = '';
+    params = Util.createParams('order', order, params);
+    params = Util.createParams('direction', direction, params);
+    params = Util.createParams('page', page, params);
+    params = Util.createParams('size', size, params);
+    params = Util.createParams('date', date != null ? moment(date).format('YYYY-MM-DD') : null, params);
+    console.log(environment.apiURL + '/order/client/list' + params)
+    return this.http.get(environment.apiURL + '/order/client/list' + params);
   }
 
   public filter(order: string, direction: string, page: number, size: number, date: Date) {
@@ -37,7 +44,7 @@ export class OrderService {
     params = Util.createParams('page', page, params);
     params = Util.createParams('size', size, params);
     params = Util.createParams('date', date != null ? moment(date).format('YYYY-MM-DD') : null, params);
-
+    console.log(environment.apiURL + '/order/page/filter' + params)
     return this.http.get(environment.apiURL + '/order/page/filter' + params);
   }
 

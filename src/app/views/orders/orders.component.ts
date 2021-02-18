@@ -36,21 +36,8 @@ export class OrdersComponent implements OnInit {
   @ViewChildren(NgbdSortableHeader) headersComponent: QueryList<NgbdSortableHeader>;
 
   constructor(private orderService: OrderService) {
-    this.loading = true;
-
-    this.orderService.getByClient().subscribe(
-      (data: any) => {
-        console.log(data);
-        this.orders = data;
-        this.loading = false;
-        this.totalReceber = this.orders.reduce(this.reducer, 0) || 0;
-      },
-      (error: any) => {
-        this.loading = false;
-        Swal.fire('Oops...', 'Erro ao listar pedidos!', 'error');
-        console.log(error);
-      }
-    );
+    this.pageSize = 5;
+    this.filter();
   }
 
   ngOnInit(): void {
@@ -65,11 +52,14 @@ export class OrdersComponent implements OnInit {
     let date: Date = null;
     if (this.dateText && this.dateText.split('/').length === 3) date = moment(this.dateText, 'DD/MM/YYYY').toDate();
 
-    this.orderService.filter(this.order ?? 'id', this.direction ?? 'ASC', this.page, environment.page, date).subscribe(
+    this.loading = true;
+
+    this.orderService.getByClient(this.order ?? 'id', this.direction ?? 'ASC', this.page, 5, date).subscribe(
       (data: any) => {
         this.orders = data['docs'];
         this.size = data['total'];
-        this.loading = false
+        this.loading = false;
+        this.totalReceber = this.orders.reduce(this.reducer, 0) || 0;
       },
       (error: any) => {
         this.loading = false;
@@ -77,6 +67,19 @@ export class OrdersComponent implements OnInit {
         console.log(error);
       }
     );
+
+    // this.orderService.filter(this.order ?? 'id', this.direction ?? 'ASC', this.page, environment.page, date).subscribe(
+    //   (data: any) => {
+    //     this.orders = data['docs'];
+    //     this.size = data['total'];
+    //     this.loading = false
+    //   },
+    //   (error: any) => {
+    //     this.loading = false;
+    //     Swal.fire('Oops...', 'Erro ao listar pedidos!', 'error');
+    //     console.log(error);
+    //   }
+    // );
   }
 
   public onSort({ column, direction }: SortEvent) {

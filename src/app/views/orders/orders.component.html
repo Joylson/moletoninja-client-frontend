@@ -12,25 +12,30 @@
     <div class="container-fluid">
         <div class="card" *ngFor="let order of orders">
             <div class="row">
-                <div class="col-md-4 d-flex align-items-center ">
+                <div class="col-md-2 d-flex align-items-center justify-content-center justify-content-md-start">
                     <img style="width: 100%;" [src]="'./assets/images/order-empty.png'" alt="..." style="max-height: 100px;">
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-10">
                     <div class="card-body">
-                        <div class="card-title d-flex justify-content-between">
-                            <h5>{{order.id}}</h5>
-                            <h6>Status: {{order.payed ? ' Pago' : 'Não pago'}}</h6>
-                            <h5>{{order.date | date: 'dd/MM/yyyy'}}</h5>
+                        <div class="card-title d-flex flex-column flex-md-row justify-content-between align-items-center">
+                            <p class="text-muted m-0 mt-2">{{order.id}}</p>
+                            <p class="text-muted m-0 mt-2">{{order.date | date: 'dd/MM/yyyy'}}</p>
+                            <p class="text-muted m-0 mt-2">
+                                {{order.total | currency:'BRL':'symbol':'1.2':'pt'}}
+                            </p>
+                            <span *ngIf="!order.payed" class="badge bg-warning text-dark mt-2">Aguardando Pagamento</span>
+                            <span *ngIf="order.payed" class="badge bg-success text-dark mt-2">Pago</span>
                         </div>
-                        <p class="text-muted">
-                            {{order.total | currency:'BRL':'symbol':'1.2':'pt'}}
-                        </p>
-                        <div class="d-flex justify-content-end">
-                            <a [routerLink]="order.id" class="btn btn-orange align-self-center">Visualizar</a>
+                        <div class="d-flex justify-content-center justify-content-md-end mt-2">
+                            <a [routerLink]="order.id" class="btn btn-orange flex-grow-1 flex-md-grow-0">Visualizar</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="mt-2">
+        <ngb-pagination [collectionSize]="size" [(page)]="page" [pageSize]="pageSize" (pageChange)="pageSelect()">
+        </ngb-pagination>
     </div>
 </div>
