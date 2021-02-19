@@ -44,6 +44,12 @@
                             </h5>
                             <h5>{{ 'Tamanho: ' + item.stockProduct.size.name }}</h5>
                             <h5>{{ 'Quantidade: ' + (item.quantity) }}</h5>
+                            <h5 *ngIf="item.orderProductPrints.length > 0" style="padding-top: 2px">
+                                <h5>Estampa:</h5>
+                                <br/>
+                                <img [src]="item.orderProductPrints[0].photo" class="img" style="max-height: 70px; margin-top: 7px"> 
+                            </h5>
+                            <h5 *ngIf="item.orderProductPrints.length == 0">S/E</h5>
                         </div>
                         <div>
                             <h5><strong>Vl. Unitário: </strong>{{ (item.price | currency:'BRL':'symbol':'1.2':'pt') }}

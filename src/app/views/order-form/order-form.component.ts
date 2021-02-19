@@ -43,7 +43,7 @@ export class OrderFormComponent implements OnInit {
 
               this.loading = false;
 
-              console.log(this.order.orderProducts);
+              console.log(this.order);
             },
             (error: any) => {
               this.loading = false;
