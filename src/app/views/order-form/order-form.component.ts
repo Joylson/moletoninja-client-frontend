@@ -93,6 +93,10 @@ export class OrderFormComponent implements OnInit {
     }
   }
 
+  openFile(fileUrl: string) {
+    window.open(fileUrl, '_blank');
+  }
+
   open(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg', centered: true }).result.then((result) => {
     }, (reason) => { });

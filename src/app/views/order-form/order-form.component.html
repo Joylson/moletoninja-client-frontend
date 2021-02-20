@@ -20,7 +20,20 @@
             </div>
             <hr>
             <div class="row" style="min-height: 200px;">
-
+                <div class="container-fluid">
+                    <div class="card" *ngFor="let tag of order.orderTags">
+                        <div style="display: flex; justify-content: space-between; padding-right: 7px">
+                            <div>
+                                <span>{{tag.file}}</span>
+                            </div>
+                            <div>
+                                <a (click)="openFile(tag.fileData)" style="cursor: pointer; align-self: flex-end">
+                                    <i class="fa fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
