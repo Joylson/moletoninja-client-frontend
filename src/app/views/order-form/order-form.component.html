@@ -2,28 +2,61 @@
 
 <app-navbar></app-navbar>
 
+<!-- Modal -->
+<ng-template #content let-modal>
+    <div
+        class="modal-header d-flex justify-content-start justify-content-md-end pl-2 pl-md-0 pt-2 pb-2 pt-md-0 pb-md-0">
+        <a class="model-close" type="button" (click)="modal.dismiss('Cross click')" id="dismissModal">
+            <i class="fas fa-close d-none d-lg-block"></i>
+            <i class="fas fa-arrow-left text-orange d-block d-lg-none" style="font-size: 22px;"></i>
+        </a>
+    </div>
+    <div class="modal-body">
+        <form class="form-container">
+            <div class="row row-adicionar-etiqueta">
+                <button type="button btn-orange" class="btn btn-add-etiqueta" (click)="fileInput.click()">Adicionar
+                    etiqueta</button>
+                <input hidden (change)="adicionarArquivo()" #fileInput type="file" id="file" accept="application/pdf">
+            </div>
+            <hr>
+            <div class="row" style="min-height: 200px;">
+
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+<!-- Pedido -->
 <div class="container-fluid container-main container-main-white" style="background-color: white; padding: 30px;">
     <form class="form-container">
         <h1 class="text-title">Detalhes do pedido</h1>
         <div class="row">
             <div class="col-sm-12 col-md-2">
                 <label for="id">Código</label>
-                <input type="text" class="form-control" id="id" placeholder="Código do pedido" [(ngModel)]="order.id" name="id" disabled>
+                <input type="text" class="form-control" id="id" placeholder="Código do pedido" [(ngModel)]="order.id"
+                    name="id" disabled>
             </div>
             <div class="col-sm-12 col-md-4">
                 <label for="parceiro">Parceiro</label>
-                <input type="text" class="form-control" id="parceiro" placeholder="Parceiro" [(ngModel)]="order.partner" name="parceiro" disabled>
+                <input type="text" class="form-control" id="parceiro" placeholder="Parceiro" [(ngModel)]="order.partner"
+                    name="parceiro" disabled>
             </div>
             <div class="col-sm-12 col-md-2">
                 <label for="data">Data</label>
-                <input class="form-control" placeholder="Data do pedido" name="dp" [(ngModel)]="order.date" id="data" disabled>
+                <input class="form-control" placeholder="Data do pedido" name="dp" [(ngModel)]="order.date" id="data"
+                    disabled>
             </div>
             <div class="col-sm12 col-md-2">
                 <label for="data">Pago</label>
-                <input class="form-control" type="checkbox" id="payed" name="payed" [checked]="order.payed" [(ngModel)]="order.payed" style="width: 30px" disabled>
+                <input class="form-control" type="checkbox" id="payed" name="payed" [checked]="order.payed"
+                    [(ngModel)]="order.payed" style="width: 30px" disabled>
             </div>
         </div>
         <br />
+        <div class="row" style="display: flex; justify-content: flex-end; padding-right: 17px">
+            <a class="icon" style="cursor: pointer; color:black; text-decoration: none" (click)="open(content)">
+                <i class="fa fa-tags" style="color: black; margin-right: 4px"></i> Etiquetas</a>
+        </div>
         <hr />
 
         <h1 class="text-title">Itens do pedido</h1>
@@ -31,7 +64,8 @@
         <div class="card mt-2" *ngFor="let item of order.orderProducts; index as i">
             <div class="row">
                 <div class="col-md-2 d-flex align-items-center ">
-                    <img [src]="item.stockProduct.product.photo ? item.stockProduct.product.photo : './assets/images/product-default.jpg'" alt="..." style="max-height: 100px;">
+                    <img [src]="item.stockProduct.product.photo ? item.stockProduct.product.photo : './assets/images/product-default.jpg'"
+                        alt="..." style="max-height: 100px;">
                 </div>
                 <div class="col-md-10">
                     <div class="card-body">
@@ -39,22 +73,25 @@
                             <h5><strong>{{ item.stockProduct.product.id + ' - ' + item.stockProduct.product.name
                                     }}</strong></h5>
                             <h5 style="display: flex">{{ item.stockProduct.color.name }}
-                                <div class="circle" [ngStyle]="{'background-color': '#' + item.stockProduct.color.hexadecimal}">
+                                <div class="circle"
+                                    [ngStyle]="{'background-color': '#' + item.stockProduct.color.hexadecimal}">
                                 </div>
                             </h5>
                             <h5>{{ 'Tamanho: ' + item.stockProduct.size.name }}</h5>
                             <h5>{{ 'Quantidade: ' + (item.quantity) }}</h5>
                             <h5 *ngIf="item.orderProductPrints.length > 0" style="padding-top: 2px">
                                 <h5>Estampa:</h5>
-                                <br/>
-                                <img [src]="item.orderProductPrints[0].photo" class="img" style="max-height: 70px; margin-top: 7px"> 
+                                <br />
+                                <img [src]="item.orderProductPrints[0].photo" class="img"
+                                    style="max-height: 70px; margin-top: 7px">
                             </h5>
                             <h5 *ngIf="item.orderProductPrints.length == 0">S/E</h5>
                         </div>
                         <div>
                             <h5><strong>Vl. Unitário: </strong>{{ (item.price | currency:'BRL':'symbol':'1.2':'pt') }}
                             </h5>
-                            <h5><strong>Vl. Total: </strong>{{ (item.price * item.quantity | currency:'BRL':'symbol':'1.2':'pt') }}
+                            <h5><strong>Vl. Total: </strong>{{ (item.price * item.quantity |
+                                currency:'BRL':'symbol':'1.2':'pt') }}
                             </h5>
                         </div>
                     </div>

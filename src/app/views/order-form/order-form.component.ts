@@ -4,6 +4,7 @@ import { OrderService } from 'src/app/services/order.service';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
 import * as moment from 'moment';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-order-form',
@@ -19,7 +20,8 @@ export class OrderFormComponent implements OnInit {
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
@@ -40,10 +42,7 @@ export class OrderFormComponent implements OnInit {
                 }
 
               this.order.date = moment(this.order.date).format('DD/MM/YYYY');
-
               this.loading = false;
-
-              console.log(this.order);
             },
             (error: any) => {
               this.loading = false;
@@ -54,6 +53,49 @@ export class OrderFormComponent implements OnInit {
         }
       }
     );
+  }
+
+  adicionarArquivo() {
+    this.loading = true;
+    const inputNode: any = document.querySelector('#file');
+
+    let partes: string[] = inputNode.files[0].name.split('.');
+    let extensao: string = partes[partes.length - 1];
+
+    if (!(extensao.toUpperCase() == 'PDF')) {
+      this.loading = false;
+      Swal.fire('Oops...', 'Aceitamos apenas arquivos em formato PDF!', 'warning')
+      return;
+    }
+
+    if (typeof (FileReader) !== 'undefined') {
+      const reader = new FileReader();
+      reader.readAsDataURL(inputNode.files[0]);
+      reader.onload = (_event) => {
+        const file = {
+          name: inputNode.files[0].name,
+          type: inputNode.files[0].type,
+          base64: reader.result,
+          orderId: this.order.id
+        };
+
+        this.orderService.addFile(file).subscribe(
+          (data: any) => {
+            this.loading = false;
+            document.getElementById('dismissModal').click();
+            Swal.fire('Sucesso', 'Etiqueta adicionada com sucesso', 'success');
+          },
+          (error: any) => {
+            this.loading = false;
+            Swal.fire('Oops...', 'Erro ao adicionar etiqueta!', 'error')
+          });
+      }
+    }
+  }
+
+  open(content: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg', centered: true }).result.then((result) => {
+    }, (reason) => { });
   }
 
   close() {

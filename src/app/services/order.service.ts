@@ -26,6 +26,10 @@ export class OrderService {
     return this.http.get(environment.apiURL + '/order/' + id);
   }
 
+  addFile(file: any) {
+    return this.http.post(environment.apiURL + '/order/addFile', file);
+  }
+
   public getByClient(order: string, direction: string, page: number, size: number, date: Date) {
     let params = '';
     params = Util.createParams('order', order, params);
