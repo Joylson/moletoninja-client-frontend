@@ -31,7 +31,7 @@ export class OrdersComponent implements OnInit {
   //search
   public dateText: string = '';
 
-  public totalReceber: number = 0;
+  public totalPagar: number = 0;
 
   @ViewChildren(NgbdSortableHeader) headersComponent: QueryList<NgbdSortableHeader>;
 
@@ -59,7 +59,7 @@ export class OrdersComponent implements OnInit {
         this.orders = data['docs'];
         this.size = data['total'];
         this.loading = false;
-        this.totalReceber = this.orders.reduce(this.reducer, 0) || 0;
+        this.totalPagar = this.orders.reduce(this.reducer, 0) || 0;
       },
       (error: any) => {
         this.loading = false;
@@ -67,19 +67,6 @@ export class OrdersComponent implements OnInit {
         console.log(error);
       }
     );
-
-    // this.orderService.filter(this.order ?? 'id', this.direction ?? 'ASC', this.page, environment.page, date).subscribe(
-    //   (data: any) => {
-    //     this.orders = data['docs'];
-    //     this.size = data['total'];
-    //     this.loading = false
-    //   },
-    //   (error: any) => {
-    //     this.loading = false;
-    //     Swal.fire('Oops...', 'Erro ao listar pedidos!', 'error');
-    //     console.log(error);
-    //   }
-    // );
   }
 
   public onSort({ column, direction }: SortEvent) {
