@@ -70,10 +70,43 @@ export class OrderService {
     });
   }
 
+  public async addStockProductKit(product: any) {
+    let order = await JSON.parse(localStorage.getItem('currentOrder'));
+    if (!order)
+      order = this.newOrder();
+    if (!order.stockProductsKit)
+      order.stockProductsKit = [];
+    if (this.validStockKit(order.stockProductsKit, product)) {
+      product.selStockProductsKit = product.selStockProductsKit.map((spk) => {
+        spk.quantitySel = 1;
+        return spk;
+      });
+      let qtd = 0;
+      for (let spk of product.selStockProductsKit) {
+        if (qtd === 0 || spk.quantity < qtd)
+          qtd = spk.quantity;
+      }
+      product.quantity = qtd;
+      product.quantitySel = 1;
+      order.stockProductsKit.push(product);
+      localStorage.setItem('currentOrder', JSON.stringify(order));
+      this.currentOrderSubject.next(order);
+    }
+  }
+
   private validStock(stockProducts: [any], stockProduct: any) {
     let valid = true;
     stockProducts.forEach(async (sp) => {
       if (sp.id === stockProduct.id)
+        valid = false;
+    });
+    return valid;
+  }
+
+  private validStockKit(stockProductsKit: [any], product: any) {
+    let valid = true;
+    stockProductsKit.forEach(async (sp) => {
+      if (sp.id === product.id)
         valid = false;
     });
     return valid;
@@ -88,12 +121,29 @@ export class OrderService {
     let order = await JSON.parse(localStorage.getItem('currentOrder'));
     if (order) {
       order.stockProducts = order.stockProducts.filter((sp) => sp.id !== id);
-      if (order.stockProducts.length === 0) {
+      if (order.stockProducts.length === 0 && (!order.stockProductsKit || order.stockProductsKit.length === 0)) {
         order = null;
       }
       localStorage.setItem('currentOrder', JSON.stringify(order));
       this.currentOrderSubject.next(order);
     }
+  }
+
+  public async removerKit(id: any) {
+    let order = await JSON.parse(localStorage.getItem('currentOrder'));
+    if (order) {
+      order.stockProductsKit = order.stockProductsKit.filter((sp) => sp.id !== id);
+      if (order.stockProductsKit.length === 0 && (!order.stockProducts || order.stockProducts.length === 0)) {
+        order = null;
+      }
+      localStorage.setItem('currentOrder', JSON.stringify(order));
+      this.currentOrderSubject.next(order);
+    }
+  }
+
+  public setOrder(order: any) {
+    localStorage.setItem('currentOrder', JSON.stringify(order));
+    this.currentOrderSubject.next(order);
   }
 
   public clear() {

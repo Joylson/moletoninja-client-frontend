@@ -21,6 +21,11 @@ export class OrderCardComponent implements OnInit {
     private authenticationService: AuthenticationService) {
     this.orderService.currentOrder.subscribe((order) => {
       this.order = order;
+      if (this.order && this.order.stockProductsKit)
+        this.order.stockProductsKit = this.order.stockProductsKit.map((spk) => {
+          spk.isCollapsed = false;
+          return spk;
+        });
     });
   }
 
@@ -31,18 +36,14 @@ export class OrderCardComponent implements OnInit {
     this.orderService.remover(stockProduct.id);
   }
 
-  public addQtd(stockProduct) {
-    console.log(stockProduct.quantity )
-    if (stockProduct.quantitySel < stockProduct.quantity)
-      stockProduct.quantitySel++;
+  public removerKit(product: any) {
+    this.orderService.removerKit(product.id);
   }
 
-
-  public removeQtd(stockProduct) {
-    if (stockProduct.quantitySel > 1)
-      stockProduct.quantitySel--;
+  public changeQtd() {
+    if (this.order)
+      this.orderService.setOrder(this.order);
   }
-
 
   public finalityOrder() {
     if (!this.authenticationService.isLogged)
@@ -54,4 +55,7 @@ export class OrderCardComponent implements OnInit {
       }, (error) => console.log(error));
   }
 
+  public arrayNumber(ranger: number): Array<number> {
+    return Array(ranger).fill(null).map((x, i) => i + 1);
+  }
 }

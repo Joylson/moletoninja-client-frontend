@@ -71,13 +71,37 @@ export class ProductComponent implements OnInit, OnChanges {
   }
 
   openKitProduct(content, product) {
+    this.msg = null;
     this.productKit = product;
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg', centered: true }).result.then((result) => {
     }, (reason) => {
     });
   }
 
+
+  private validKit(): boolean {
+    let valid = true;
+    for (const kit of this.product.kits) {
+      if (!this.getStockProduct(kit.product))
+        valid = false;
+    }
+    return valid;
+  }
+
   public async addStockProduct() {
+    if (this.product.kits.length) {
+      if (!this.validKit()) {
+        this.msg = 'não foi selecionado a cor e a tamanho dos produtos do kit';
+        return;
+      }
+      this.msg = null;
+      this.product.selStockProductsKit = this.selStockProductKit;
+      this.orderService.addStockProductKit(this.product);
+      this.add.emit(null);
+      return;
+    }
+
+
     if (!this.selColor) {
       this.msg = 'não foi selecionado a cor';
       return;
@@ -120,7 +144,7 @@ export class ProductComponent implements OnInit, OnChanges {
     this.selColor = color;
 
     let colorPhoto = this.product.productColorPhotos.filter(photo => photo.color.id == color.id);
-    if(colorPhoto && colorPhoto.length > 0) {
+    if (colorPhoto && colorPhoto.length > 0) {
       this.product.photo = colorPhoto[0].photo;
     }
 

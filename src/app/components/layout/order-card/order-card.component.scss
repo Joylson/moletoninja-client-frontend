@@ -7,6 +7,7 @@
     z-index: 1028;
     background-color: white;
     box-shadow: 0 -2px 8px black;
+    overflow-y: auto;
 }
 
 .card {
@@ -32,6 +33,16 @@
 }
 
 .card-img-left img {
+    max-height: 100%;
+    width: auto !important;
+    max-width: 100%;
+}
+
+.card-img-rigth {
+    height: 75px;
+}
+
+.card-img-rigth img {
     max-height: 100%;
     width: auto !important;
     max-width: 100%;
@@ -63,4 +74,29 @@
     border-left: 0;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+}
+
+.itens-product-kit {
+    height: 30px;
+    margin-bottom: -5px;
+    right: -3px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.circle-itens-product-kit {
+    border: none;
+    height: 15px;
+    width: 15px;
+}
+
+.card-itens-product-kit {
+    background-color: white;
+    border-radius: 5px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 5px rgb(0 0 0 / 15%);
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    height: 30px;
+    width: 30px;
 }

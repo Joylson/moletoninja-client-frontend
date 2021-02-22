@@ -159,3 +159,16 @@ a {
         margin-top: 200px !important;
     }
 }
+
+.form-select {
+    border: 0;
+    border-bottom: 1px solid #ff9d35;
+    background-color: white;
+    // color: #ff9d35;
+    height: 40px;
+    outline: 0px;
+}
+
+.form-select option {
+    font-size: 20px;
+}
