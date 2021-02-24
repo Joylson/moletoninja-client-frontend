@@ -4,8 +4,7 @@
 
 <!-- Modal -->
 <ng-template #content let-modal>
-    <div
-        class="modal-header d-flex justify-content-start justify-content-md-end pl-2 pl-md-0 pt-2 pb-2 pt-md-0 pb-md-0">
+    <div class="modal-header d-flex justify-content-start justify-content-md-end pl-2 pl-md-0 pt-2 pb-2 pt-md-0 pb-md-0">
         <a class="model-close" type="button" (click)="modal.dismiss('Cross click')" id="dismissModal">
             <i class="fas fa-close d-none d-lg-block"></i>
             <i class="fas fa-arrow-left text-orange d-block d-lg-none" style="font-size: 22px;"></i>
@@ -46,23 +45,19 @@
         <div class="row">
             <div class="col-sm-12 col-md-2">
                 <label for="id">Código</label>
-                <input type="text" class="form-control" id="id" placeholder="Código do pedido" [(ngModel)]="order.id"
-                    name="id" disabled>
+                <input type="text" class="form-control" id="id" placeholder="Código do pedido" [(ngModel)]="order.id" name="id" disabled>
             </div>
             <div class="col-sm-12 col-md-4">
                 <label for="parceiro">Parceiro</label>
-                <input type="text" class="form-control" id="parceiro" placeholder="Parceiro" [(ngModel)]="order.partner"
-                    name="parceiro" disabled>
+                <input type="text" class="form-control" id="parceiro" placeholder="Parceiro" [(ngModel)]="order.partner" name="parceiro" disabled>
             </div>
             <div class="col-sm-12 col-md-2">
                 <label for="data">Data</label>
-                <input class="form-control" placeholder="Data do pedido" name="dp" [(ngModel)]="order.date" id="data"
-                    disabled>
+                <input class="form-control" placeholder="Data do pedido" name="dp" [(ngModel)]="order.date" id="data" disabled>
             </div>
             <div class="col-sm12 col-md-2">
                 <label for="data">Pago</label>
-                <input class="form-control" type="checkbox" id="payed" name="payed" [checked]="order.payed"
-                    [(ngModel)]="order.payed" style="width: 30px" disabled>
+                <input class="form-control" type="checkbox" id="payed" name="payed" [checked]="order.payed" [(ngModel)]="order.payed" style="width: 30px" disabled>
             </div>
         </div>
         <br />
@@ -74,38 +69,41 @@
 
         <h1 class="text-title">Itens do pedido</h1>
 
-        <div class="card mt-2" *ngFor="let item of order.orderProducts; index as i">
-            <div class="row">
-                <div class="col-md-2 d-flex align-items-center ">
-                    <img [src]="item.stockProduct.product.photo ? item.stockProduct.product.photo : './assets/images/product-default.jpg'"
-                        alt="..." style="max-height: 100px;">
-                </div>
-                <div class="col-md-10">
-                    <div class="card-body">
-                        <div class="card-title d-flex justify-content-between">
-                            <h5><strong>{{ item.stockProduct.product.id + ' - ' + item.stockProduct.product.name
-                                    }}</strong></h5>
-                            <h5 style="display: flex">{{ item.stockProduct.color.name }}
-                                <div class="circle"
-                                    [ngStyle]="{'background-color': '#' + item.stockProduct.color.hexadecimal}">
+        <div class="row">
+            <div class="col-lg-6 col-md-12  mt-2" *ngFor="let item of order.orderProducts; index as i">
+                <div class="card p-2 pl-4 pr-4">
+                    <div class="row">
+                        <div class="col-md-2 d-flex align-items-center flex-column">
+                            <div class="d-flex">
+                                <div *ngIf="item.orderProductPrints.length > 0" class="itens-product-kit d-flex align-items-center justify-content-end img-kit">
+                                    <div class="card-itens-product d-flex justify-content-center align-items-center" style="margin-right: 2px;">
+                                        <img class="card-img-print" [src]="item.orderProductPrints[0].photo">
+                                    </div>
                                 </div>
-                            </h5>
-                            <h5>{{ 'Tamanho: ' + item.stockProduct.size.name }}</h5>
-                            <h5>{{ 'Quantidade: ' + (item.quantity) }}</h5>
-                            <h5 *ngIf="item.orderProductPrints.length > 0" style="padding-top: 2px">
-                                <h5>Estampa:</h5>
-                                <br />
-                                <img [src]="item.orderProductPrints[0].photo" class="img"
-                                    style="max-height: 70px; margin-top: 7px">
-                            </h5>
-                            <h5 *ngIf="item.orderProductPrints.length == 0">S/E</h5>
+                            </div>
+                            <img [src]="item.stockProduct.product.photo ? item.stockProduct.product.photo : './assets/images/product-default.jpg'" alt="..." style="max-height: 100px;">
                         </div>
-                        <div>
-                            <h5><strong>Vl. Unitário: </strong>{{ (item.price | currency:'BRL':'symbol':'1.2':'pt') }}
-                            </h5>
-                            <h5><strong>Vl. Total: </strong>{{ (item.price * item.quantity |
-                                currency:'BRL':'symbol':'1.2':'pt') }}
-                            </h5>
+                        <div class="col-md-7">
+                            <div class="d-flex align-items-start justify-content-center justify-content-md-start mt-3 mt-md-0 flex-wrap">
+                                <div class="circle" [ngStyle]="{'background-color': '#' + item.stockProduct.color.hexadecimal}">
+                                </div>
+                                <p class="m-0 ml-2 mr-2" style="font-weight: bold;text-align: center;">
+                                    {{ item.stockProduct.product.name }}
+                                </p>
+                                <p class="d-none d-sm-block">-</p>
+                                <p class="m-0 ml-2">{{item.stockProduct.size.name }}</p>
+                            </div>
+                            <div class="flex-md-column justify-content-between justify-content-md-start d-none d-sm-flex">
+                                <p>Tamanho: {{item.stockProduct.size.name }}</p>
+                                <p>Cor: {{item.stockProduct.color.name }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mt-2">
+                            <div class="d-flex flex-sm-column justify-content-center justify-content-sm-center align-items-end" style="height: 100%;">
+                                <p class="mr-4 mr-sm-0 text-danger">{{ (item.price | currency:'BRL':'symbol':'1.2':'pt') }} X {{ item.quantity}}
+                                </p>
+                                <p class="text-success">{{ (item.price * item.quantity | currency:'BRL':'symbol':'1.2':'pt') }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>

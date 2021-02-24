@@ -16,17 +16,45 @@ h1 {
 }
 
 .card {
-    padding-left:15px;
+    padding-left: 15px;
 }
 
 .row-adicionar-etiqueta {
-    display: flex; 
-    justify-content: flex-end; 
-    margin-right: 2px; 
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 2px;
     margin-top: 2px
 }
 
 .btn-add-etiqueta {
     background-color: rgb(246, 84, 34);
-    color:white;
+    color: white;
+}
+
+.card-img-print {
+    max-height: 178px;
+    max-width: 100%;
+}
+
+.itens-product-kit {
+    height: 40px;
+    right: -5px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.card-itens-product {
+    background-color: white;
+    border-radius: 5px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 5px rgb(0 0 0 / 15%);
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    height: 40px;
+    width: 40px;
+}
+
+.img-kit img {
+    max-height: 100%;
+    max-width: 100%;
 }
