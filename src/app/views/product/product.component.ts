@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OrderService } from 'src/app/services/order.service';
@@ -21,6 +22,8 @@ export class ProductComponent implements OnInit, OnChanges {
   public product: any;
   public colors: any = [];
   public sizes: any = [];
+  public colorsValid: any = [];
+  public sizesValid: any = [];
 
   //selcionar
   public selColor: any;
@@ -60,6 +63,10 @@ export class ProductComponent implements OnInit, OnChanges {
         let size = this.sizes.filter((c) => c['id'] === sp.size.id);
         if (size.length === 0)
           this.sizes.push(sp.size);
+        if (this.sizes.length === 1) {
+          this.selSize = sp.size;
+          this.loadingColors();
+        }
       });
     });
   }
@@ -142,19 +149,72 @@ export class ProductComponent implements OnInit, OnChanges {
   selectColor(color: any) {
     this.msg = null;
     this.selColor = color;
-
+    this.colorsValid = [];
+    this.loadingSizes();
     let colorPhoto = this.product.productColorPhotos.filter(photo => photo.color.id == color.id);
     if (colorPhoto && colorPhoto.length > 0) {
       this.product.photo = colorPhoto[0].photo;
     }
-
-    console.log(this.product.photo);
   }
 
   selectSize(size: any) {
     this.msg = null;
     this.selSize = size;
+    this.sizesValid = [];
+    this.loadingColors();
   }
+
+  loadingColors() {
+    if (this.selSize)
+      this.stockProductService.getColorBySizeAndProduct(this.selSize.id, this.product.id).subscribe(async (data) => {
+        this.colorsValid = await Promise.all(data['select'].filter((s) => s.quantity > 0).map((s) => s.color));
+        console.log(this.colorsValid)
+        this.validColor();
+      });
+  }
+
+  loadingSizes() {
+    if (this.selColor)
+      this.stockProductService.getSizeByColorAndProduct(this.selColor.id, this.product.id).subscribe(async (data) => {
+        this.sizesValid = await Promise.all(data['select'].filter((c) => c.quantity > 0).map((c) => c.size));
+        console.log(this.sizesValid)
+        this.validSize();
+      });
+  }
+
+
+  validColor() {
+    if (!this.selColor)
+      return;
+    let colors = this.colorsValid.filter((c) => c.id === this.selColor.id);
+    if (colors.length === 0)
+      this.selColor = null;
+  }
+
+
+  validSize() {
+    if (!this.selSize)
+      return;
+    let sizes = this.sizesValid.filter((s) => s.id === this.selSize.id);
+    if (sizes.length === 0)
+      this.selSize = null;
+  }
+
+  existColor(color) {
+    if (this.colorsValid.length === 0)
+      return true;
+    let colors = this.colorsValid.filter((c) => c.id === color.id);
+    return colors.length > 0;
+  }
+
+
+  existSize(size) {
+    if (this.sizesValid.length === 0)
+      return true;
+    let sizes = this.sizesValid.filter((c) => c.id === size.id);
+    return sizes.length > 0;
+  }
+
 
   printSelect(print, modal) {
     this.print = print;

@@ -48,7 +48,7 @@
             <label>{{selSize ? selSize.name : ''}}</label>
             <ul class="navbar-nav d-flex flex-row flex-wrap">
                 <li *ngFor="let size of sizes" class="nav-item me-auto mr-3 mb-2 mb-0 mt-1 mt-2">
-                    <a type="button" [style]="{'background-color': selSize  && size.id === selSize.id ? '#6c757d' : '', 'color': selSize  && size.id === selSize.id ? 'white' : ''}" (click)="selectSize(size)" class="btn btn-outline-secondary">{{size.name}}</a>
+                    <a type="button" [ngClass]="{'btn-size-block' : !existSize(size)}" [style]="{'background-color': selSize  && size.id === selSize.id ? '#6c757d' : '', 'color': selSize  && size.id === selSize.id ? 'white' : ''}" (click)="selectSize(size)" class="btn btn-outline-secondary">{{size.name}}</a>
                 </li>
             </ul>
         </div>
@@ -58,7 +58,7 @@
             <ul class="navbar-nav d-flex flex-row flex-wrap">
                 <li *ngFor="let color of colors" class="nav-item me-auto mr-3 mb-2 mb-0 mt-1 mt-2">
                     <a type="button" (click)="selectColor(color)">
-                        <div class="circle" [style]="{'background-color': '#' + color.hexadecimal, 'border-color' : selColor  && color.id === selColor.id ?  '#ff9d35' : '#203A43'}">
+                        <div [ngClass]="{'circle-color-block' : !existColor(color)}" class="circle" [style]="{'background-color': '#' + color.hexadecimal, 'border-color' : selColor  && color.id === selColor.id ?  '#ff9d35' : '#203A43'}">
                         </div>
                     </a>
                 </li>
@@ -82,7 +82,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-center">
-            <p class="text-danger mt-1" style="font-size: 15px;">{{msg}}</p>
+            <p class="text-danger mt-1" style="font-size: 15px; text-align: center;">{{msg}}</p>
         </div>
     </div>
 </div>

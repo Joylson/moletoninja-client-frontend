@@ -12,4 +12,12 @@ export class StockProductService {
   getByColorAndSizeAndProduct(colorId: any, sizeId: any, productId: any) {
     return this.http.get(environment.apiURL + `/stock-product/product/${productId}/color/${colorId}/size/${sizeId}`);
   }
+
+  getColorBySizeAndProduct(sizeId: any, productId: any) {
+    console.log(environment.apiURL + `/stock-product/product/${productId}/size/${sizeId}`);
+    return this.http.get(environment.apiURL + `/stock-product/product/${productId}/size/${sizeId}`);
+  }
+  getSizeByColorAndProduct(colorId: any, productId: any) {
+    return this.http.get(environment.apiURL + `/stock-product/product/${productId}/color/${colorId}`);
+  }
 }
