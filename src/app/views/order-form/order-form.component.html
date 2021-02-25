@@ -40,7 +40,7 @@
 
 <!-- Pedido -->
 <div class="container-fluid container-main container-main-white" style="background-color: white; padding: 30px;">
-    <form class="form-container">
+    <div class="form-container">
         <h1 class="text-title">Detalhes do pedido</h1>
         <div class="row">
             <div class="col-sm-12 col-md-2">
@@ -70,12 +70,12 @@
         <h1 class="text-title">Itens do pedido</h1>
 
         <div class="row">
-            <div class="col-lg-6 col-md-12  mt-2" *ngFor="let item of order.orderProducts; index as i">
+            <div class="col-lg-6 col-md-12  mt-2" *ngFor="let item of filterStockProducts(order.orderProducts); index as i">
                 <div class="card p-2 pl-4 pr-4">
                     <div class="row">
                         <div class="col-md-2 d-flex align-items-center flex-column">
                             <div class="d-flex">
-                                <div *ngIf="item.orderProductPrints.length > 0" class="itens-product-kit d-flex align-items-center justify-content-end img-kit">
+                                <div *ngIf="item.orderProductPrints.length > 0" class="itens-product-kit d-flex align-items-center justify-content-end img-kit-2">
                                     <div class="card-itens-product d-flex justify-content-center align-items-center" style="margin-right: 2px;">
                                         <img class="card-img-print" [src]="item.orderProductPrints[0].photo">
                                     </div>
@@ -108,6 +108,45 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-lg-6 col-md-12  mt-2" *ngFor="let item of filterProducts(order.orderProducts); index as i">
+                <div class="card p-2 pl-4 pr-4">
+                    <div class="row">
+                        <div class="col-md-2 d-flex align-items-center justify-content-center">
+                            <img [src]="item.product.photo ? item.product.photo : './assets/images/product-default.jpg'" alt="..." style="max-height: 100px;">
+                        </div>
+                        <div class="col-md-7">
+                            <div class="d-flex align-items-start justify-content-center justify-content-md-start mt-3 mt-md-0 flex-wrap">
+                                <p class="m-0 ml-2 mr-2" style="font-weight: bold;text-align: center;">
+                                    {{ item.product.name }}
+                                </p>
+                            </div>
+                            <div class="d-flex align-items-start justify-content-center justify-content-md-start mt-3 mt-md-2 flex-wrap ">
+                                <div *ngFor="let kit of item.orderKitStockProducts" class="card align-items-center justify-content-center card-img-print-container img-kit p-1 mt-1 mb-1 mr-1">
+                                    <div class="itens-product-kit-2 d-flex align-items-center justify-content-end">
+                                        <div *ngIf="kit.orderProductPrints.length > 0" class="card-itens-product-kit-2 d-flex justify-content-center align-items-center" style="margin-right: 2px;">
+                                            <img class="card-img-print" [src]="kit.orderProductPrints[0].print ? kit.orderProductPrints[0].print.photo : './assets/images/print-product.png'">
+                                        </div>
+                                        <div class="card-itens-product-kit-2 d-flex justify-content-center align-items-center" style="margin-right: 2px;">{{kit.stockProduct.size.name}}</div>
+                                        <div class="card-itens-product-kit-2 d-flex justify-content-center align-items-center">
+                                            <div class="circle circle-itens-product-kit m-0" [style]="{'background-color': '#' + kit.stockProduct.color.hexadeci}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <img class="card-img-print" [src]="kit.stockProduct.product.photo">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mt-2">
+                            <div class="d-flex flex-sm-column justify-content-center justify-content-sm-center align-items-end" style="height: 100%;">
+                                <p class="mr-4 mr-sm-0 text-danger">{{ (item.price | currency:'BRL':'symbol':'1.2':'pt') }} X {{ item.quantity}}
+                                </p>
+                                <p class="text-success">{{ (item.price * item.quantity | currency:'BRL':'symbol':'1.2':'pt') }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="row" style="margin-top: 7px">
             <div class="col-sm-12 col-md-12 rowTotal">
@@ -118,5 +157,5 @@
         <div class="rowSalvar">
             <button class="btn btn-cancelar" (click)="close()">Voltar</button>
         </div>
-    </form>
+    </div>
 </div>

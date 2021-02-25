@@ -93,6 +93,13 @@ export class OrderFormComponent implements OnInit {
     }
   }
 
+  //stock product filter
+  filterStockProducts = (stockProducts) => stockProducts ? stockProducts.filter((sp) => !(!sp.stockProduct)) : [];
+
+
+  //product filter
+  filterProducts = (stockProducts) => stockProducts ? stockProducts.filter((sp) => !(!sp.product)) : [];
+
   openFile(fileUrl: string) {
     window.open(fileUrl, '_blank');
   }

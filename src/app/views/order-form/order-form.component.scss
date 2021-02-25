@@ -58,3 +58,54 @@ h1 {
     max-height: 100%;
     max-width: 100%;
 }
+
+.img-kit-2 img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.card-itens-product-md {
+    height: 80px;
+    width: 80px;
+    position: relative;
+}
+
+.itens-product-kit-2 {
+    height: 30px;
+    margin-top: -5px;
+    right: -3px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.card-itens-product-kit-2 {
+    background-color: white;
+    border-radius: 5px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 5px rgb(0 0 0 / 15%);
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    height: 30px;
+    width: 30px;
+}
+
+.card-img-print-container {
+    cursor: pointer;
+    height: 178px;
+}
+
+@media (max-width: 768px) {
+    .card-img-print {
+        max-height: none;
+    }
+    .card-img-print-container {
+        height: auto;
+    }
+}
+
+.img-kit {
+    height: 110px;
+    width: 104px;
+    min-width: 104px;
+    // cursor: pointer;
+}
