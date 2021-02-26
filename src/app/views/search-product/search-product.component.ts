@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ColorService } from 'src/app/services/color.service';
 import { SizeService } from 'src/app/services/size.service';
 import { environment } from 'src/environments/environment';
+import { FavoriteService } from 'src/app/services/favorite.service';
 
 @Component({
   selector: 'app-search-product',
@@ -25,6 +26,9 @@ export class SearchProductComponent implements OnInit {
   public sizes: any;
   public size: any;
 
+  //favorited
+  private favorited: boolean = false;
+
   //model
   public models: any;
   public model: any;
@@ -38,12 +42,13 @@ export class SearchProductComponent implements OnInit {
   public filterSelectSize: boolean = false;
   public filterSelectModel: boolean = false;
 
-  constructor(
+  constructor(private router: Router,
     private productService: ProductService,
     private colorService: ColorService,
     private sizeService: SizeService,
     private modalService: NgbModal,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private favoriteService: FavoriteService
   ) {
     this.pageSize = environment.page;
   }
@@ -58,9 +63,11 @@ export class SearchProductComponent implements OnInit {
   filter() {
     this.activeRoute.queryParams.subscribe(params => {
       let search = params['search'];
-      this.productService.filter('id', 'ASC', this.model ? this.model.type : null, this.page, environment.page, search, this.size ? this.size.id : null, this.color ? this.color.id : null).subscribe((data) => {
+      this.favorited = params['favorited'] && params['favorited'] === 'true' ? true : false;
+      this.productService.filter('id', 'ASC', this.model ? this.model.type : null, this.page, environment.page, search, this.size ? this.size.id : null, this.color ? this.color.id : null, this.favorited).subscribe((data) => {
         this.products = data['docs'];
         this.sizePage = data['total'];
+        console.log(data['docs']);
       })
     });
   }
@@ -161,6 +168,19 @@ export class SearchProductComponent implements OnInit {
     } else {
       product.typePhoto = false;
     }
+  }
+
+
+  addFavorite(product) {
+    if (product.favorites.length === 0)
+      this.favoriteService.post({ productId: product.id }).subscribe((data) => {
+        this.filter();
+      });
+    else
+      this.favoriteService.delete(product.favorites[0].id).subscribe((data) => {
+        console.log(data)
+        this.filter();
+      });
   }
 
 }
