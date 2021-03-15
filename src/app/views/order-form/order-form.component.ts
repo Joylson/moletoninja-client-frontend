@@ -47,7 +47,7 @@ export class OrderFormComponent implements OnInit {
             (error: any) => {
               this.loading = false;
               Swal.fire('Oops...', 'Erro ao buscar dados do pedido!', 'error')
-              console.error(error);
+              // console.error(error);
             }
           )
         }

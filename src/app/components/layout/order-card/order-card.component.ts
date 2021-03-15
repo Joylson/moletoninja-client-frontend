@@ -15,6 +15,11 @@ export class OrderCardComponent implements OnInit {
 
   @Input() show: boolean = false;
 
+  public loading: boolean = false;
+  public error: boolean = false;
+  public success: boolean = false;
+  public msg: string ;
+
   constructor(private orderService: OrderService,
     private orderApiService: OrderApiService,
     private router: Router,
@@ -48,14 +53,34 @@ export class OrderCardComponent implements OnInit {
   public finalityOrder() {
     if (!this.authenticationService.isLogged)
       return this.router.navigate(['/login']);
-    if (this.order)
-      this.orderApiService.post(this.order).subscribe((data) => {
-        console.log('data')
+    if (this.order) {
+      this.loading = true;
+      this.orderApiService.post(this.order).subscribe(async (data) => {
         this.orderService.clear();
-      }, (error) => console.log(error));
+        this.loading = false;
+        this.success = true;
+        this.msg = "Seu pedido foi realizado com sucesso, você será redirecionado para o seu pedido";
+        await this.delay(3000)
+        this.router.navigate([`orders/${data['result']['id']}`]);
+      }, async (error) => {
+        this.loading = false;
+        this.error = true;
+        this.msg = 'Houve um erro durante o processamento do seu pedido, favor tentar novamente mais tarde';
+        await this.delay(2000)
+        this.error = false;
+      });
+    }
   }
 
   public arrayNumber(ranger: number): Array<number> {
     return Array(ranger).fill(null).map((x, i) => i + 1);
+  }
+
+  private delay(ms: number): Promise<boolean> {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(true);
+      }, ms);
+    });
   }
 }

@@ -1,6 +1,6 @@
 <div class="container-fluid container-print">
     <div class="row row-cols-2 row-cols-md-3 row-cols-xl-5 g-4 mb-4">
-        <div *ngFor="let print of prints" class="col">
+        <div *ngFor="let print of prints" class="col mb-3">
             <div class="card card-default h-100" style="cursor: pointer;" (click)="select(print)">
                 <div class="d-flex justify-content-center align-items-center container-card-img-top">
                     <img [src]="print.imageFile" class="card-img-top" [alt]="print.name" onerror="this.src = './assets/images/product-default.jpg'">

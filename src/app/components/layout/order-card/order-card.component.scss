@@ -28,6 +28,7 @@
     opacity: 0.5;
 }
 
+
 .card-img-left {
     height: 158px;
 }
@@ -48,7 +49,13 @@
     max-width: 100%;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1400px) {
+    .container-order {
+        width: 45%;
+    }
+}
+
+@media (max-width: 992px) {
     .container-order {
         width: 100%;
         top: 76px;

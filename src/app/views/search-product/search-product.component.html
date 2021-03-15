@@ -83,7 +83,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-center align-items-center pt-4">
-        <ngb-pagination *ngIf="products.length > 0" [collectionSize]="sizePage" [(page)]="page" [pageSize]="pageSize" (pageChange)="filter()">
+        <ngb-pagination *ngIf="products && products.length > 0" [collectionSize]="sizePage" [(page)]="page" [pageSize]="pageSize" (pageChange)="filter()">
         </ngb-pagination>
     </div>
 </div>

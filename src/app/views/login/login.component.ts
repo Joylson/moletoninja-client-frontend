@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate([this.returnUrl]);
         },
         (error: any) => {
-          console.log(error);
+          // console.log(error);
           Swal.fire('Oops...', 'Erro não foi possível fazer o login, verifique e-mail e senha!', 'error')
           this.loading = false;
         });

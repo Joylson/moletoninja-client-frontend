@@ -64,7 +64,7 @@ export class OrdersComponent implements OnInit {
       (error: any) => {
         this.loading = false;
         Swal.fire('Oops...', 'Erro ao listar pedidos!', 'error');
-        console.log(error);
+        // console.log(error);
       }
     );
   }

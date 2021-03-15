@@ -37,7 +37,7 @@ export class OrderService {
     params = Util.createParams('page', page, params);
     params = Util.createParams('size', size, params);
     params = Util.createParams('date', date != null ? moment(date).format('YYYY-MM-DD') : null, params);
-    console.log(environment.apiURL + '/order/client/list' + params)
+    // console.log(environment.apiURL + '/order/client/list' + params)
     return this.http.get(environment.apiURL + '/order/client/list' + params);
   }
 
@@ -48,7 +48,7 @@ export class OrderService {
     params = Util.createParams('page', page, params);
     params = Util.createParams('size', size, params);
     params = Util.createParams('date', date != null ? moment(date).format('YYYY-MM-DD') : null, params);
-    console.log(environment.apiURL + '/order/page/filter' + params)
+    // console.log(environment.apiURL + '/order/page/filter' + params)
     return this.http.get(environment.apiURL + '/order/page/filter' + params);
   }
 

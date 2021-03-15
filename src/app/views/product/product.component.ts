@@ -168,7 +168,7 @@ export class ProductComponent implements OnInit, OnChanges {
     if (this.selSize)
       this.stockProductService.getColorBySizeAndProduct(this.selSize.id, this.product.id).subscribe(async (data) => {
         this.colorsValid = await Promise.all(data['select'].filter((s) => s.quantity > 0).map((s) => s.color));
-        console.log(this.colorsValid)
+        // console.log(this.colorsValid)
         this.validColor();
       });
   }
@@ -177,7 +177,7 @@ export class ProductComponent implements OnInit, OnChanges {
     if (this.selColor)
       this.stockProductService.getSizeByColorAndProduct(this.selColor.id, this.product.id).subscribe(async (data) => {
         this.sizesValid = await Promise.all(data['select'].filter((c) => c.quantity > 0).map((c) => c.size));
-        console.log(this.sizesValid)
+        // console.log(this.sizesValid)
         this.validSize();
       });
   }
@@ -246,7 +246,7 @@ export class ProductComponent implements OnInit, OnChanges {
           index = 1;
         }
       }
-    console.log(valid, index)
+    // console.log(valid, index)
     if (valid)
       this.selStockProductKit.push(stock);
     else

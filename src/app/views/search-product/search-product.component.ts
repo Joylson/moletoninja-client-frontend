@@ -67,7 +67,7 @@ export class SearchProductComponent implements OnInit {
       this.productService.filter('id', 'ASC', this.model ? this.model.type : null, this.page, environment.page, search, this.size ? this.size.id : null, this.color ? this.color.id : null, this.favorited).subscribe((data) => {
         this.products = data['docs'];
         this.sizePage = data['total'];
-        console.log(data['docs']);
+        // console.log(data['docs']);
       })
     });
   }
@@ -162,7 +162,7 @@ export class SearchProductComponent implements OnInit {
   }
 
   onover(product) {
-    console.log('teste')
+    // console.log('teste')
     if (product.typePhoto) {
       product.typePhoto = true;
     } else {
@@ -178,7 +178,7 @@ export class SearchProductComponent implements OnInit {
       });
     else
       this.favoriteService.delete(product.favorites[0].id).subscribe((data) => {
-        console.log(data)
+        // console.log(data)
         this.filter();
       });
   }
