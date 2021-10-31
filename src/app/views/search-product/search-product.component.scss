@@ -45,6 +45,16 @@
     height: auto;
 }
 
+.type-select {
+    color: #f8f9fa;
+    border-color: #f8f9fa;
+}
+
+.type-select:hover {
+    color: black;
+    background-color: #f8f9fa;
+}
+
 @media (max-width: 992px) {
     .container-main {
         margin-top: 310px;
@@ -53,5 +63,15 @@
         top: 320px;
         background-color: #ffcc4a;
         position: absolute;
+    }
+    
+    .type-select {
+        color: #6c757d;
+        border-color: #6c757d;
+    }
+    
+    .type-select:hover {
+        color: white;
+        background-color: #6c757d;
     }
 }

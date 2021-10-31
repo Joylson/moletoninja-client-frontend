@@ -32,22 +32,22 @@
 <div class="container-filter" [ngClass]="diplayFilter()">
     <div class="container">
         <div *ngIf="filterSelectColor"
-            class="row row-cols-3 row-cols-md-5 row-cols-xl-6 g-4 justify-content-center m-4">
+            class="row row-cols-3 row-cols-md-5 row-cols-xl-6 g-4 justify-content-center mt-4 mb-4">
             <a type="button"
-                class="btn btn-outline-secondary mr-2 ml-2 mt-2 d-flex justify-content-center align-items-center"
+                class="btn type-select mr-2 ml-2 mt-2 d-flex justify-content-center align-items-center"
                 *ngFor="let color of colors" (click)="selectColor(color)">{{color.name}}</a>
         </div>
 
-        <div *ngIf="filterSelectSize" class="row row-cols-3 row-cols-md-5 row-cols-xl-6 g-4 justify-content-center m-4">
+        <div *ngIf="filterSelectSize" class="row row-cols-3 row-cols-md-5 row-cols-xl-6 g-4 justify-content-center mt-4 mb-4">
             <a type="button"
-                class="btn btn-outline-secondary mr-2 ml-2  mt-2 d-flex justify-content-center align-items-center"
+                class="btn type-select mr-2 ml-2  mt-2 d-flex justify-content-center align-items-center"
                 *ngFor="let size of sizes" (click)="selectSize(size)">{{size.name}}</a>
         </div>
 
         <div *ngIf="filterSelectModel"
-            class="row row-cols-3 row-cols-md-5 row-cols-xl-6 g-4 justify-content-center m-4">
+            class="row row-cols-3 row-cols-md-5 row-cols-xl-6 g-4 justify-content-center  mt-4 mb-4">
             <a type="button"
-                class="btn btn-outline-secondary mr-2 ml-2 mt-2 d-flex justify-content-center align-items-center"
+                class="btn type-select mr-2 ml-2 mt-2 d-flex justify-content-center align-items-center"
                 *ngFor="let model of models" (click)="selectModel(model)">{{model.name}}</a>
         </div>
     </div>
