@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiURL: 'https://moletoninja.herokuapp.com',
+  apiURL: 'https://confex-varejo-api.herokuapp.com',
   page : 15
 };
