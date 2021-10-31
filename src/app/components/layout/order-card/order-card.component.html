@@ -35,7 +35,7 @@
                         </div>
                         <div class="d-flex {{stockProduct.print ? 'justify-content-between' : 'justify-content-end'}}">
                             <img style="max-height: 50px" *ngIf="stockProduct.print" [src]="stockProduct.print.imageFile" [alt]="stockProduct.print.name">
-                            <button style="width: 100px;" type="button" class="btn btn-orange align-self-center mt-2 mb-2" (click)="remover(stockProduct)">Excluir</button>
+                            <button style="width: 100px;" type="button" class="btn btn-blue align-self-center mt-2 mb-2" (click)="remover(stockProduct)">Excluir</button>
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                                     {{i}} {{i === 1 ? 'unidade' : 'unidades'}}
                                 </option>
                             </select>
-                            <button style="width: 100px;" type="button" class="btn btn-orange align-self-center mt-2 mb-2" (click)="removerKit(product)">Excluir</button>
+                            <button style="width: 100px;" type="button" class="btn btn-blue align-self-center mt-2 mb-2" (click)="removerKit(product)">Excluir</button>
                         </div>
                         <div class="d-flex justify-content-end">
                             <a (click)="product.isCollapsed = !product.isCollapsed" class="text-primary" style="cursor: pointer;">Visualizar
@@ -93,7 +93,7 @@
             </div>
         </div>
         <div *ngIf="order" class="row pt-3 pb-3 pl-4 pr-4">
-            <button type="button" class="btn btn-orange flex-fill" (click)="finalityOrder()">Finalizar Pedido</button>
+            <button type="button" class="btn btn-blue flex-fill" (click)="finalityOrder()">Finalizar Pedido</button>
         </div>
     </div>
     <div *ngIf="!order  && !loading && !error && !success" class="order-empty"></div>

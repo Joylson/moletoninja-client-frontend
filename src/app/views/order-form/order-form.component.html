@@ -7,13 +7,13 @@
     <div class="modal-header d-flex justify-content-start justify-content-md-end pl-2 pl-md-0 pt-2 pb-2 pt-md-0 pb-md-0">
         <a class="model-close" type="button" (click)="modal.dismiss('Cross click')" id="dismissModal">
             <i class="fas fa-close d-none d-lg-block"></i>
-            <i class="fas fa-arrow-left text-orange d-block d-lg-none" style="font-size: 22px;"></i>
+            <i class="fas fa-arrow-left text-blue d-block d-lg-none" style="font-size: 22px;"></i>
         </a>
     </div>
     <div class="modal-body">
         <form class="form-container">
             <div class="row row-adicionar-etiqueta">
-                <button type="button btn-orange" class="btn btn-add-etiqueta" (click)="fileInput.click()">Adicionar
+                <button type="button btn-blue" class="btn btn-add-etiqueta" (click)="fileInput.click()">Adicionar
                     etiqueta</button>
                 <input hidden (change)="adicionarArquivo()" #fileInput type="file" id="file" accept="application/pdf">
             </div>

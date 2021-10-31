@@ -3,7 +3,7 @@
 }
 
 .fa-heart {
-    color: #fc6616 !important;
+    color: #3f4090 !important;
 }
 
 .card-title {
@@ -35,8 +35,8 @@
     width: 100%;
     top: 120px;
     position: fixed;
-    z-index: 1033;
-    background-color: #203A43;
+    z-index: 1029;
+    background-color: #3f4090;
     box-shadow: 0 1px 5px rgb(0 0 0 / 15%);
     transition: height 1s;
 }
@@ -51,7 +51,7 @@
     }
     .container-filter {
         top: 320px;
-        background-color: #fc6616;
+        background-color: #ffcc4a;
         position: absolute;
     }
 }

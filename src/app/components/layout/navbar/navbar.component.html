@@ -1,12 +1,16 @@
 <nav class="navbar navbar-main navbar-expand-lg navbar-bg-black fixed-top justify-content-lg-between">
     <a class="navbar-brand" href="/">
-        <img src="./assets/images/moletoninja.png" alt="Logo" srcset="" height="50">
+        <img src="./assets/images/logo confex com texto amarelo.png" alt="Logo" srcset="" height="30"
+            style="margin-top: 10px; margin-bottom: 10px;">
     </a>
     <div class="d-flex">
-        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Visualizar menu">
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar-collapse"
+            aria-controls="navbar-collapse" aria-expanded="false" aria-label="Visualizar menu">
             <i class="fa fa-bars text-white fa-md"></i>
         </button>
-        <button type="button" class="d-block d-lg-none navbar-toggler collapsed d-flex justify-content-center align-items-stretch" (click)="toggleShow()" style="cursor: pointer;" aria-label="Carrinho de compra">
+        <button type="button"
+            class="d-block d-lg-none navbar-toggler collapsed d-flex justify-content-center align-items-stretch"
+            (click)="toggleShow()" style="cursor: pointer;" aria-label="Carrinho de compra">
             <i class="fas fa-shopping-cart text-white fa-md"></i>
             <div *ngIf="order && (order.stockProducts || order.stockProductsKit)"
                 class="d-flex align-items-end justify-content-center text-white"
@@ -16,11 +20,12 @@
         </button>
     </div>
     <form class="d-none d-lg-block">
-        <input class="form-control me-2 form-search" type="search" (keypress)="search($event)" placeholder="Pesquisar produto" aria-label="Pesquisar produto">
+        <input class="form-control me-2 form-search" type="search" (keypress)="search($event)"
+            placeholder="Pesquisar produto" aria-label="Pesquisar produto">
     </form>
     <div class="collapse navbar-collapse" id="navbar-collapse">
         <ul class="navbar-nav d-none d-lg-block">
-            <li class="nav-item me-auto ml-lg-2 mr-lg-2 mb-2 mb-lg-0 mt-lg-1 mt-3">
+            <li class="nav-item me-auto ml-lg-2 mr-lg-2 mb-2 mb-lg-0 mt-lg-1 mt-3 pl-0 pr-0">
                 <button *ngIf="!user" type="button" class="btn btn-outline-light btn-top" routerLink="/login"><i
                         class="fa fa-user "></i>
                     Entrar</button>
@@ -65,7 +70,8 @@
             </li>
             <div class="dropdown-divider"></div>
             <li class="nav-item me-auto ml-lg-2 mr-lg-2 mb-2 mb-lg-0 mt-lg-1 mt-3 p-2">
-                <a routerLink="/orders" type="button" style="color: white;"><i class="fa fa-clipboard-list mr-3"></i> Pedidos</a>
+                <a routerLink="/orders" type="button" style="color: white;"><i class="fa fa-clipboard-list mr-3"></i>
+                    Pedidos</a>
             </li>
             <li class="nav-item me-auto ml-lg-2 mr-lg-2 mb-2 mb-lg-0 mt-lg-1 mt-3 p-2">
                 <a type="button" style="cursor: pointer; color: white;" (click)="viewFavorited()">
@@ -89,13 +95,18 @@
                 </li>
                 <li class="nav-item me-auto ml-lg-2 mr-lg-2 mb-2 mb-lg-0 mt-lg-1 mt-3">
                     <div class="icon" style="cursor: pointer;" (click)="viewFavorited()">
-                        <i class="fa-heart text-black fa-lg text-white" [ngClass]="{'far' : !favorited, 'fas' : favorited}"></i>
+                        <i class="fa-heart text-black fa-lg text-white"
+                            [ngClass]="{'far' : !favorited, 'fas' : favorited}"></i>
                     </div>
                 </li>
-                <li class="nav-item me-auto ml-lg-2 mr-lg-2 mb-2 mb-lg-0 mt-lg-1 mt-3 d-flex justify-content-center align-items-stretch" style="cursor: pointer;" (click)="toggleShow()">
+                <li class="nav-item me-auto ml-lg-2 mr-lg-2 mb-2 mb-lg-0 mt-lg-1 mt-3 d-flex justify-content-center align-items-stretch"
+                    style="cursor: pointer;" (click)="toggleShow()">
                     <a class="icon" style="cursor: pointer;"><i
                             class="fas fa-shopping-cart text-black fa-lg text-white"></i></a>
-                    <div *ngIf="order && (order.stockProducts || order.stockProductsKit)" class="d-flex align-items-end justify-content-center text-white">{{(order.stockProducts?.length ? order.stockProducts?.length : 0) + (order.stockProductsKit?.length ? order.stockProductsKit?.length : 0)}}
+                    <div *ngIf="order && (order.stockProducts || order.stockProductsKit)"
+                        class="d-flex align-items-end justify-content-center text-white">{{(order.stockProducts?.length
+                        ? order.stockProducts?.length : 0) + (order.stockProductsKit?.length ?
+                        order.stockProductsKit?.length : 0)}}
                     </div>
                 </li>
             </ul>
@@ -107,7 +118,8 @@
     <div class="container-fluid d-flex justify-content-lg-between">
         <ul class="navbar-nav" style="width: 100%;">
             <li class="nav-item me-auto ml-lg-2 mr-lg-2 mb-2 mb-lg-0 mt-lg-1 mt-3 p-2">
-                <input class="form-control me-2 form-search" type="search" (keypress)="search($event)" placeholder="Pesquisar produto" aria-label="Pesquisar produto">
+                <input class="form-control me-2 form-search" type="search" (keypress)="search($event)"
+                    placeholder="Pesquisar produto" aria-label="Pesquisar produto">
             </li>
             <li class="nav-item me-auto ml-lg-2 mr-lg-2 mb-2 mb-lg-0 mt-lg-1 mt-3 p-2">
                 <ng-content select="[mobilectop]"></ng-content>

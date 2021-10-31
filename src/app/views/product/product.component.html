@@ -73,7 +73,7 @@
                 <li *ngFor="let color of colors" class="nav-item me-auto mr-3 mb-2 mb-0 mt-1 mt-2">
                     <a type="button" (click)="selectColor(color)">
                         <div [ngClass]="{'circle-color-block' : !existColor(color)}" class="circle"
-                            [style]="{'background-color': '#' + color.hexadecimal, 'border-color' : selColor  && color.id === selColor.id ?  '#ff9d35' : '#203A43'}">
+                            [style]="{'background-color': '#' + color.hexadecimal, 'border-color' : selColor  && color.id === selColor.id ?  '#ff9d35' : '#3f4090'}">
                         </div>
                     </a>
                 </li>
@@ -86,18 +86,18 @@
                 <img class="card-img-print" [src]="print ? print.imageFile : './assets/images/print-product.png'">
                 <div style="position: absolute; height: 100%; width: 100%;"
                     class="d-flex justify-content-center align-items-center">
-                    <p class="text-orange m-0" style="transform: rotate(-26deg);">CLICK PARA SELECIONAR A ESTAMPA</p>
+                    <p class="text-blue m-0" style="transform: rotate(-26deg);">CLICK PARA SELECIONAR A ESTAMPA</p>
                 </div>
             </div>
         </div>
         <div class="card mt-3">
             <div class="d-flex justify-content-center">
                 <app-spinner *ngIf="loading"></app-spinner>
-                <button *ngIf="!kit && !loading" type="button" class="btn btn-orange flex-fill"
+                <button *ngIf="!kit && !loading" type="button" class="btn btn-blue flex-fill"
                     (click)="addStockProduct()">
                     <i class="fas fa-shopping-cart"></i> Adicionar Carrinho
                 </button>
-                <button *ngIf="kit && !loading" type="button" class="btn btn-orange flex-fill"
+                <button *ngIf="kit && !loading" type="button" class="btn btn-blue flex-fill"
                     (click)="addKitProduct()">
                     <i class="fas fa-plus"></i> Selcionar Item Do Kit
                 </button>
@@ -121,7 +121,7 @@
         class="modal-header d-flex justify-content-start justify-content-md-end pl-2 pl-md-0 pt-2 pb-2 pt-md-0 pb-md-0">
         <a class="model-close" type="button" (click)="modal.dismiss('Cross click')">
             <i class="fas fa-close d-none d-lg-block"></i>
-            <i class="fas fa-arrow-left text-orange d-block d-lg-none" style="font-size: 22px;"></i>
+            <i class="fas fa-arrow-left text-blue d-block d-lg-none" style="font-size: 22px;"></i>
         </a>
     </div>
     <div class="modal-body">
@@ -135,7 +135,7 @@
         class="modal-header d-flex justify-content-start justify-content-md-end pl-2 pl-md-0 pt-2 pb-2 pt-md-0 pb-md-0">
         <a class="model-close" type="button" (click)="modalproduct.dismiss('Cross click')">
             <i class="fas fa-close d-none d-lg-block"></i>
-            <i class="fas fa-arrow-left text-orange d-block d-lg-none" style="font-size: 22px;"></i>
+            <i class="fas fa-arrow-left text-blue d-block d-lg-none" style="font-size: 22px;"></i>
         </a>
     </div>
     <div class="modal-body">
