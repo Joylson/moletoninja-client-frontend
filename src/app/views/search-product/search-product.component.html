@@ -12,6 +12,10 @@
             <a type="button" class="btn btn-outline-light" (click)="filterModel()">{{model ? model.name : 'Modelo'}} <i
                     style="margin-left: 20px;" class="fas fa-angle-down "></i></a>
         </li>
+        <li class="nav-item me-auto ml-lg-2 mr-lg-2 mb-2 mb-lg-0 mt-lg-1 mt-3">
+            <a type="button" class="btn btn-outline-light" (click)="filterCategory()">{{category ? category.name : 'Categoria'}} <i
+                    style="margin-left: 20px;" class="fas fa-angle-down "></i></a>
+        </li>
     </ul>
     <ul mobilectop class="navbar-nav">
         <li class="nav-item me-auto ml-lg-2 mr-lg-2 mb-2 mb-lg-0 mt-lg-1 mt-3 d-flex">
@@ -25,6 +29,10 @@
         <li class="nav-item me-auto ml-lg-2 mr-lg-2 mb-2 mb-lg-0 mt-lg-1 mt-3 d-flex">
             <a type="button" class="btn btn-outline-secondary flex-fill" (click)="filterModel()">{{model ? model.name :
                 'Modelo'}} <i style="margin-left: 20px;" class="fas fa-angle-down "></i></a>
+        </li>
+        <li class="nav-item me-auto ml-lg-2 mr-lg-2 mb-2 mb-lg-0 mt-lg-1 mt-3 d-flex">
+            <a type="button" class="btn btn-outline-secondary flex-fill" (click)="filterCategory()">{{category ? category.name :
+                'Categoria'}} <i style="margin-left: 20px;" class="fas fa-angle-down "></i></a>
         </li>
     </ul>
 </app-navbar>
@@ -49,6 +57,12 @@
             <a type="button"
                 class="btn type-select mr-2 ml-2 mt-2 d-flex justify-content-center align-items-center"
                 *ngFor="let model of models" (click)="selectModel(model)">{{model.name}}</a>
+        </div>
+        <div *ngIf="filterSelectCategory"
+            class="row row-cols-3 row-cols-md-5 row-cols-xl-6 g-4 justify-content-center  mt-4 mb-4">
+            <a type="button"
+                class="btn type-select mr-2 ml-2 mt-2 d-flex justify-content-center align-items-center"
+                *ngFor="let category of categories" (click)="selectCategory(category)">{{category.name}}</a>
         </div>
     </div>
 </div>

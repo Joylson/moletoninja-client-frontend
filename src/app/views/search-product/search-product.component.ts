@@ -6,6 +6,7 @@ import { ColorService } from 'src/app/services/color.service';
 import { SizeService } from 'src/app/services/size.service';
 import { environment } from 'src/environments/environment';
 import { FavoriteService } from 'src/app/services/favorite.service';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-search-product',
@@ -26,6 +27,10 @@ export class SearchProductComponent implements OnInit {
   public sizes: any;
   public size: any;
 
+  //size
+  public categories: any;
+  public category: any;
+
   //favorited
   private favorited: boolean = false;
 
@@ -41,6 +46,7 @@ export class SearchProductComponent implements OnInit {
   public filterSelectColor: boolean = false;
   public filterSelectSize: boolean = false;
   public filterSelectModel: boolean = false;
+  public filterSelectCategory: boolean = false;
 
   constructor(private router: Router,
     private productService: ProductService,
@@ -48,7 +54,8 @@ export class SearchProductComponent implements OnInit {
     private sizeService: SizeService,
     private modalService: NgbModal,
     private activeRoute: ActivatedRoute,
-    private favoriteService: FavoriteService
+    private favoriteService: FavoriteService,
+    private categoryService: CategoryService
   ) {
     this.pageSize = environment.page;
   }
@@ -57,18 +64,16 @@ export class SearchProductComponent implements OnInit {
     this.filter();
   }
 
-
-
-
   filter() {
     this.activeRoute.queryParams.subscribe(params => {
       let search = params['search'];
       this.favorited = params['favorited'] && params['favorited'] === 'true' ? true : false;
-      this.productService.filter('id', 'ASC', this.model ? this.model.type : null, this.page, environment.page, search, this.size ? this.size.id : null, this.color ? this.color.id : null, this.favorited).subscribe((data) => {
-        this.products = data['docs'];
-        this.sizePage = data['total'];
-        // console.log(data['docs']);
-      })
+      this.productService.filter('id', 'ASC', this.model ? this.model.type : null, this.page, environment.page, search, this.size ? this.size.id : null,
+        this.color ? this.color.id : null, this.favorited, this.category ? this.category.id : null).subscribe((data) => {
+          this.products = data['docs'];
+          this.sizePage = data['total'];
+          // console.log(data['docs']);
+        })
     });
   }
 
@@ -127,6 +132,27 @@ export class SearchProductComponent implements OnInit {
     }
   }
 
+  selectCategory(category) {
+    console.log('test');
+    this.category = category;
+    this.filterSelectCategory = false;
+    this.filter();
+    this.categories = null;
+  }
+
+  filterCategory() {
+    if (!this.filterSelectCategory) {
+      this.categoryService.get().subscribe((data) => {
+        this.categories = data;
+        this.filterNone();
+        this.filterSelectCategory = true;
+      }, (error) => console.log(error))
+    } else {
+      this.filterNone();
+      this.filterSelectCategory = false;
+    }
+  }
+
   selectModel(model) {
     this.model = model;
     this.filterSelectModel = false;
@@ -155,10 +181,11 @@ export class SearchProductComponent implements OnInit {
     this.filterSelectColor = false;
     this.filterSelectSize = false;
     this.filterSelectModel = false;
+    this.filterSelectCategory = false;
   }
 
   diplayFilter() {
-    return { 'filter-visibled': this.filterSelectSize || this.filterSelectColor || this.filterSelectModel }
+    return { 'filter-visibled': this.filterSelectSize || this.filterSelectColor || this.filterSelectModel || this.filterSelectCategory }
   }
 
   onover(product) {
